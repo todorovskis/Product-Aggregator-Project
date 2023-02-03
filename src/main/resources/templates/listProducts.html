@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<form method="GET">
+    <label for="productName">Product name</label>
+    <input id="productName" type="text" name="productName"/>
+    <label for="categoryId">Category</label>
+<!--    <select id="categoryId" name="categoryId">-->
+<!--        <option value="">All</option>-->
+<!--        <option th:each="category: ${categories}" th:value="${category.getId()}"-->
+<!--                th:text="${category.getCategoryName()}"> [type.name]</option>-->
+<!--    </select>-->
+    <button id="filterName" type="submit">Filter</button>
+    <ul>
+        <li th:each="product : ${products}"
+            th:text="${product.getProductName()}"></li>
+    </ul>
+</form>
+</body>
+</html>
