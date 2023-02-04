@@ -27,7 +27,7 @@ public class ProductController {
     @GetMapping
     public String getProducts(@RequestParam(required = false) String error,
                               @RequestParam(required = false) String productName,
-                              @RequestParam(required = false) Long categoryId,
+                              @RequestParam(required = false) Integer categoryId,
                               Model model) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);

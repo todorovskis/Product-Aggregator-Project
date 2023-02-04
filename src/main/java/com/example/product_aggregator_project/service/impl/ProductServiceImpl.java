@@ -4,6 +4,7 @@ import com.example.product_aggregator_project.model.Category;
 import com.example.product_aggregator_project.model.Product;
 import com.example.product_aggregator_project.model.exceptions.CategoryIdNotFoundException;
 import com.example.product_aggregator_project.repository.CategoryRepository;
+
 import com.example.product_aggregator_project.repository.ProductRepository;
 import com.example.product_aggregator_project.service.ProductService;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductsByNameAndCategory(String name, Long categoryId) {
+    public List<Product> findProductsByNameAndCategory(String name, Integer categoryId) {
 //        Category category = this.categoryRepository.findById(categoryId)
 //                .orElseThrow(CategoryIdNotFoundException::new);
 //        if(name != null && category != null){
