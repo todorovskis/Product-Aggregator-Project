@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AdminPanelRepositoryQuery6 extends JpaRepository<MostFavouriteProduct, Integer> {
+public interface MostFavouriteProductRepository extends JpaRepository<MostFavouriteProduct, Integer> {
 
     @Query(value = "select\n" +
             "\tq1.product_id,\n" +

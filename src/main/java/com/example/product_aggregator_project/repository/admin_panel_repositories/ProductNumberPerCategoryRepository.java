@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AdminPanelRepositoryQuery9 extends JpaRepository<ProductNumberPerCategory, Integer> {
+public interface ProductNumberPerCategoryRepository extends JpaRepository<ProductNumberPerCategory, Integer> {
 
     @Query(value = "select\n" +
             "\tc.category_id,\n" +

@@ -7,7 +7,9 @@ import com.example.product_aggregator_project.repository.CategoryRepository;
 import com.example.product_aggregator_project.service.CategoryService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -31,9 +33,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Product> listProductsByCategory(Integer categoryId) {
         Category category = this.categoryRepository.findById(categoryId).orElseThrow(CategoryIdNotFoundException::new);
-        List<Product> products = category.getProducts();
-        return products;
+
+        List<Product> products = new ArrayList<>();
+        addProducts(category, products);
+
+        return products.stream().distinct().collect(Collectors.toList());
     }
 
-
+    private void addProducts(Category category, List<Product> products) {
+        products.addAll(category.getProducts());
+        category.getSubcategories().forEach(s -> addProducts(s, products));
+    }
 }

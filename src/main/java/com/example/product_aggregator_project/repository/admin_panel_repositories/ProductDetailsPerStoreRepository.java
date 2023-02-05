@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AdminPanelRepositoryQuery7 extends JpaRepository<ProductDetailsPerStore, Integer> {
+public interface ProductDetailsPerStoreRepository extends JpaRepository<ProductDetailsPerStore, Integer> {
 
     @Query(value = "select\n" +
             "\t s.store_id,\n" +

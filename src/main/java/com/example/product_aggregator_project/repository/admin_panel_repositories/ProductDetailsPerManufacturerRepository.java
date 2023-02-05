@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AdminPanelRepositoryQuery8 extends JpaRepository<ProductDetailsPerManufacturer, Integer> {
+public interface ProductDetailsPerManufacturerRepository extends JpaRepository<ProductDetailsPerManufacturer, Integer> {
 
     @Query(value = "select\n" +
             "\tm.manufacturer_id,\n" +

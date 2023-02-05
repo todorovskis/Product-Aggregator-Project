@@ -1,9 +1,6 @@
 package com.example.product_aggregator_project.service;
 
-import com.example.product_aggregator_project.model.admin_panel.MostFavouriteProduct;
-import com.example.product_aggregator_project.model.admin_panel.ProductDetailsPerManufacturer;
-import com.example.product_aggregator_project.model.admin_panel.ProductDetailsPerStore;
-import com.example.product_aggregator_project.model.admin_panel.ProductNumberPerCategory;
+import com.example.product_aggregator_project.model.admin_panel.*;
 
 import java.util.List;
 
@@ -16,4 +13,14 @@ public interface AdminPanelService {
     List<ProductDetailsPerStore> findProductDetailsPerStore();
 
     List<MostFavouriteProduct> findMostFavouriteProducts();
+
+    List<FavouriteProductPerCategory> findFavouriteProductsPerCategory();
+
+    List<ProductCommentsPerManufacturer> findProductCommentsPerManufacturer();
+
+    List<HighestAvgProductRatingPerCategory> findHighestAvgProductRatingPerCategory();
+
+    List<StoresWithSameProductsOffer> findStoresWithSameProductsOffer();
+
+    List<StoresWithAllManufacturerProducts> findStoresWithAllManufacturerProducts();
 }

@@ -25,6 +25,11 @@ public class AdminPanelController{
             model.addAttribute("error", error);
         }
 
+        model.addAttribute("query1", this.adminPanelService.findStoresWithAllManufacturerProducts());
+        model.addAttribute("query2", this.adminPanelService.findStoresWithSameProductsOffer());
+        model.addAttribute("query3", this.adminPanelService.findHighestAvgProductRatingPerCategory());
+        model.addAttribute("query4", this.adminPanelService.findProductCommentsPerManufacturer());
+        model.addAttribute("query5", this.adminPanelService.findFavouriteProductsPerCategory());
         model.addAttribute("query6", this.adminPanelService.findMostFavouriteProducts());
         model.addAttribute("query7", this.adminPanelService.findProductDetailsPerStore());
         model.addAttribute("query8", this.adminPanelService.findProductDetailsPerManufacturer());

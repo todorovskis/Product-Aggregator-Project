@@ -19,6 +19,9 @@ public class Category {
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
 
+    @OneToMany(mappedBy = "parentCategory")
+    private List<Category> subcategories;
+
     @ManyToMany(mappedBy = "categories")
     private List<Product> products;
 
@@ -62,5 +65,13 @@ public class Category {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<Category> getSubcategories() {
+        return subcategories;
+    }
+
+    public void setSubcategories(List<Category> subcategories) {
+        this.subcategories = subcategories;
     }
 }

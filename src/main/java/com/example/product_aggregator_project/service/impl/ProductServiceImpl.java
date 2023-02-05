@@ -1,6 +1,7 @@
 package com.example.product_aggregator_project.service.impl;
 
 import com.example.product_aggregator_project.model.Category;
+import com.example.product_aggregator_project.model.Manufacturer;
 import com.example.product_aggregator_project.model.Product;
 import com.example.product_aggregator_project.model.exceptions.CategoryIdNotFoundException;
 import com.example.product_aggregator_project.repository.CategoryRepository;
@@ -9,7 +10,9 @@ import com.example.product_aggregator_project.repository.ProductRepository;
 import com.example.product_aggregator_project.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -33,16 +36,26 @@ public class ProductServiceImpl implements ProductService {
         Category category = categoryId != null ? this.categoryRepository.findById(categoryId)
                 .orElse(null) : null;
         if(name != null && category != null){
-            return this.productRepository.findAllByProductNameEqualsAndCategoriesContaining(name, category);
+            return this.productRepository.findAllByProductNameContainingIgnoreCaseAndCategoriesContaining(name, category);
         }
         else if(name != null){
-            return this.productRepository.findAllByProductNameEquals(name);
+            return this.productRepository.findByProductNameContainingIgnoreCase(name);
         }
         else if(category != null){
-            return this.productRepository.findAllByCategoriesContaining(category);
+            List<Product> products = new ArrayList<>();
+            addProducts(category, products);
+
+            //return this.productRepository.findAllByCategoriesContaining(category);
+            return products.stream().distinct().collect(Collectors.toList());
         }
         else{
             return this.productRepository.findAll();
         }
+    }
+
+
+    private void addProducts(Category category, List<Product> products) {
+        products.addAll(category.getProducts());
+        category.getSubcategories().forEach(s -> addProducts(s, products));
     }
 }
