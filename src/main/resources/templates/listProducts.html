@@ -1,19 +1,20 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <body>
-    <form method="GET">
+    <form method="post">
         <label for="productName">Product name</label>
         <input id="productName" type="text" name="productName"/>
-        <!--    <label for="categoryId">Category</label>-->
-        <!--    <select id="categoryId" name="categoryId">-->
-        <!--        <option value="">All</option>-->
-        <!--        <option th:each="category: ${categories}" th:value="${category.getId()}"-->
-        <!--                th:text="${category.getCategoryName()}"> [type.name]</option>-->
-        <!--    </select>-->
+        <label for="categoryId">Category</label>
+        <select id="categoryId" name="categoryId">
+            <option value="">All categories</option>
+            <option th:each="category: ${categories}" th:value="${category.getId()}"
+                    th:text="${category.getCategoryName()}"></option>
+        </select>
         <button id="filterName" type="submit">Filter</button>
-        <ul>
-            <li th:each="product : ${products}"
-                th:text="${product.getProductName()}"></li>
-        </ul>
     </form>
+    <ul>
+        <li th:each="product : ${products}"
+            th:text="${product.getProductName()}"></li>
+    </ul>
+
     </body>
 </th:block>

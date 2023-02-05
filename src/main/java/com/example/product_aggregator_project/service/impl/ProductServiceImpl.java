@@ -33,10 +33,10 @@ public class ProductServiceImpl implements ProductService {
         Category category = categoryId != null ? this.categoryRepository.findById(categoryId)
                 .orElse(null) : null;
         if(name != null && category != null){
-            return this.productRepository.findAllByProductNameEqualsAndCategoriesContaining(name, category);
+            return this.productRepository.findAllByProductNameContainingIgnoreCaseAndCategoriesContaining(name, category);
         }
         else if(name != null){
-            return this.productRepository.findAllByProductNameEquals(name);
+            return this.productRepository.findByProductNameContainingIgnoreCase(name);
         }
         else if(category != null){
             return this.productRepository.findAllByCategoriesContaining(category);

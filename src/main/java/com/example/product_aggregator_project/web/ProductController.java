@@ -7,6 +7,7 @@ import com.example.product_aggregator_project.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,20 +27,22 @@ public class ProductController {
 
     @GetMapping
     public String getProducts(@RequestParam(required = false) String error,
-                              @RequestParam(required = false) String productName,
-                              @RequestParam(required = false) Integer categoryId,
                               Model model) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        List<Product> products;
-        if(productName == null){
-            products = this.productService.listProducts();
-        }
-        else{
-            products = this.productService.findProductsByNameAndCategory(productName, categoryId);
-        }
+        model.addAttribute("products", this.productService.listProducts());
+        model.addAttribute("categories", this.categoryService.listCategories());
+        model.addAttribute("bodyContent", "listProducts");
+        return "master-template";
+    }
+
+    @PostMapping
+    public String listProductsByInputAndCategory(@RequestParam(required = false) String productName,
+                                                 @RequestParam(required = false) Integer categoryId,
+                                                 Model model) {
+        List<Product> products = this.productService.findProductsByNameAndCategory(productName, categoryId);
         model.addAttribute("products", products);
         model.addAttribute("categories", this.categoryService.listCategories());
         model.addAttribute("bodyContent", "listProducts");
