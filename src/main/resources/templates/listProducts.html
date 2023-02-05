@@ -1,6 +1,6 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <body>
-    <form method="POST">
+    <form th:method="POST">
         <label for="productName">Product name</label>
         <input id="productName" type="text" name="productName"/>
         <label for="categoryId">Category</label>
@@ -9,11 +9,18 @@
             <option th:each="category: ${categories}" th:value="${category.getId()}"
                     th:text="${category.getCategoryName()}"></option>
         </select>
+        <label for="manufacturerId">Manufacturer</label>
+        <select id="manufacturerId" name="manufacturerId">
+            <option value="">All manufacturers</option>
+            <option th:each="manufacturer: ${manufacturers}" th:value="${manufacturer.getId()}"
+                    th:text="${manufacturer.getManufacturerName()}"></option>
+        </select>
         <button id="filterName" type="submit">Filter</button>
     </form>
-    <ul>
-        <li th:each="product : ${products}"
-            th:text="${product.getProductName()}"></li>
-    </ul>
+    <form th:method="post" th:each="product: ${products}" th:action="@{'/products/{id}' (id=${product.getId()})}">
+        <li>
+            <button type="submit" th:text="${product.getProductName()}"></button>
+        </li>
+    </form>
     </body>
 </th:block>

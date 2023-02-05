@@ -18,7 +18,7 @@ public class Manufacturer {
     @Column(name = "manufacturer_country")
     private String manufacturerCountry;
 
-    @OneToMany(mappedBy = "manufacturerId")
+    @OneToMany(mappedBy = "manufacturer")
     private List<Product> products;
 
     public Manufacturer() {

@@ -9,6 +9,8 @@ public interface CategoryService {
 
     List<Category> listCategories();
 
+    Category findById(Integer categoryId);
+
     List<Category> listCategoriesByInput(String input);
 
     List<Product> listProductsByCategory(Integer categoryId);

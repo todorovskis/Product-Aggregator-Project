@@ -26,13 +26,20 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category findById(Integer categoryId) {
+        return this.categoryRepository.findById(categoryId)
+                .orElseThrow(CategoryIdNotFoundException::new);
+    }
+
+    @Override
     public List<Category> listCategoriesByInput(String input) {
         return this.categoryRepository.findByCategoryNameContainingIgnoreCase(input);
     }
 
     @Override
     public List<Product> listProductsByCategory(Integer categoryId) {
-        Category category = this.categoryRepository.findById(categoryId).orElseThrow(CategoryIdNotFoundException::new);
+        Category category = this.categoryRepository.findById(categoryId)
+                .orElseThrow(CategoryIdNotFoundException::new);
 
         List<Product> products = new ArrayList<>();
         addProducts(category, products);

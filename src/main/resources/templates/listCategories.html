@@ -3,7 +3,7 @@
         <input type="text" th:name="input">
         <button type="submit">Search</button>
     </form>
-    <form th:each="category : ${categories}" th:action="@{'/categories/{id}' (id=${category.getId()})}" method="post">
+    <form th:each="category : ${categories}" th:action="@{'/categories/{id}' (id=${category.getId()})}" th:method="post">
         <li>
             <button type="submit" th:text="${category.getCategoryName()}"></button>
         </li>

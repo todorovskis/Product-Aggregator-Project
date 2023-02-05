@@ -9,4 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Integer> {
+
+    List<Manufacturer> findByManufacturerNameContainingIgnoreCase(String input);
 }

@@ -1,0 +1,14 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+<!--    <form th:method="POST" th:action="@{'/products/{id}' (id=${product?.getId()})}">-->
+      <ul>
+          <li th:text="'Model: ' + ${product?.getProductName()}"></li>
+          <li th:text="'Manufacturer: ' + ${product?.getManufacturer()?.getManufacturerName()}"></li>
+          <li th:each="instance: ${product?.getProductInstances()}">
+              <div th:text="${instance?.getStore()?.getStoreName()} + ': ' +
+                    ${instance?.getPrice()} + ' den.'">
+              </div>
+          </li>
+
+      </ul>
+<!--    </form>-->
+</th:block>

@@ -8,7 +8,9 @@ public interface ProductService {
 
     List<Product> listProducts();
 
-    List<Product> findProductsByNameAndCategory(String name, Integer categoryId);
+    Product findById(Integer productId);
+
+    List<Product> listProductsByNameAndCategoryAndManufacturer(String name, Integer categoryId, Integer manufacturerId);
 
     //TODO: FILTERING OF PRODUCTS
 

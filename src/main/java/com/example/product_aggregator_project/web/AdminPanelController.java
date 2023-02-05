@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/panel")
 public class AdminPanelController{
 
-    private AdminPanelService adminPanelService;
+    private final AdminPanelService adminPanelService;
 
     public AdminPanelController(AdminPanelService adminPanelService) {
         this.adminPanelService = adminPanelService;

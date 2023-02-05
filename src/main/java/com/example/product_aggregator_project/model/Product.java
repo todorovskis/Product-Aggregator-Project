@@ -21,7 +21,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "manufacturer_id")
-    private Manufacturer manufacturerId;
+    private Manufacturer manufacturer;
 
     @ManyToMany
     @JoinTable(
@@ -56,11 +56,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String productName, LocalDate postDate, Manufacturer manufacturerId, List<Category> categories, ProductCharacteristic characteristicId) {
+    public Product(Integer id, String productName, LocalDate postDate, Manufacturer manufacturer, List<Category> categories, ProductCharacteristic characteristicId) {
         this.id = id;
         this.productName = productName;
         this.postDate = postDate;
-        this.manufacturerId = manufacturerId;
+        this.manufacturer = manufacturer;
         this.categories = categories;
         this.characteristicId = characteristicId;
     }
@@ -89,12 +89,12 @@ public class Product {
         this.postDate = postDate;
     }
 
-    public Manufacturer getManufacturerId() {
-        return manufacturerId;
+    public Manufacturer getManufacturer() {
+        return manufacturer;
     }
 
-    public void setManufacturerId(Manufacturer manufacturerId) {
-        this.manufacturerId = manufacturerId;
+    public void setManufacturer(Manufacturer manufacturerId) {
+        this.manufacturer = manufacturerId;
     }
 
     public List<Category> getCategories() {
@@ -111,5 +111,13 @@ public class Product {
 
     public void setCharacteristicId(ProductCharacteristic characteristicId) {
         this.characteristicId = characteristicId;
+    }
+
+    public List<ProductInstance> getProductInstances() {
+        return productInstances;
+    }
+
+    public void setProductInstances(List<ProductInstance> productInstances) {
+        this.productInstances = productInstances;
     }
 }

@@ -1,5 +1,11 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
-    <ul>
-        <li th:each="manufacturer : ${manufacturers}" th:text="${manufacturer.getManufacturerName()}"></li>
-    </ul>
+    <form th:action="@{'/manufacturers'}" th:method="post">
+        <input type="text" th:name="input">
+        <button type="submit">Search</button>
+    </form>
+    <form th:each="manufacturer : ${manufacturers}" th:action="@{'/manufacturers/{id}' (id=${manufacturer.getId()})}" method="post">
+        <li>
+            <button type="submit" th:text="${manufacturer.getManufacturerName()}"></button>
+        </li>
+    </form>
 </th:block>
