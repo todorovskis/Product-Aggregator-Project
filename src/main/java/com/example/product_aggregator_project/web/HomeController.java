@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping({"/", "/home"})
 public class HomeController {
 
     @GetMapping
@@ -16,21 +16,8 @@ public class HomeController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        return "homePage";
+        model.addAttribute("bodyContent", "homePage");
+        return "master-template";
     }
 
-    @GetMapping("/manufacturers")
-    public String getManufacturersPage(Model model){
-        return "redirect:/manufacturers";
-    }
-
-    @GetMapping("/categories")
-    public String getCategoriesPage(Model model){
-        return "redirect:/categories";
-    }
-
-    @GetMapping("/products")
-    public String getProductPage(Model model){
-        return "redirect:/products";
-    }
 }

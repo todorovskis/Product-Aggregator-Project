@@ -27,8 +27,7 @@ public class UserController {
             model.addAttribute("error", error);
         }
         this.userService.listUsers().forEach(i-> i.getUserComments().forEach(j->System.out.println(j.getUser() +" "+ j.getUserComment())));
-//                ().forEach(i -> i.getProducts().forEach(j -> System.out.println(j.getProductName() + " " + j.getManufacturerId())));
-//        model.addAttribute("roles", roles);
-        return "listUsers";
+        model.addAttribute("bodyContent", "listUsers");
+        return "master-template";
     }
 }

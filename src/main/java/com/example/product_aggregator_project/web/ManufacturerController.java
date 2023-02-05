@@ -29,7 +29,8 @@ public class ManufacturerController {
 
         List<Manufacturer> manufacturers = this.manufacturerService.listManufacturers();
         model.addAttribute("manufacturers", manufacturers);
-        return "listManufacturers";
+        model.addAttribute("bodyContent", "listManufacturers");
+        return "master-template";
     }
 
 

@@ -1,0 +1,109 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <h2>Query 6</h2>
+    <table>
+        <tr>
+            <th>Product name</th>
+            <th>Number of users</th>
+        </tr>
+        <tr class="item" th:each="result: ${query6}">
+            <td th:text="${result.getProductName()}">[product.name]</td>
+            <td th:text="${result.getNumUsersFavourite()}">[num_users]</td>
+        </tr>
+    </table><br/>
+    <h2>Query 7</h2>
+    <table>
+        <tr>
+            <th>Store name</th>
+            <th>Min price</th>
+            <th>Max price</th>
+            <th>Avg price</th>
+        </tr>
+        <tr class="item" th:each="result: ${query7}">
+            <td th:text="${result.getStoreName()}">[store.name]</td>
+            <td th:text="${result.getMinPrice()}">[min_price]</td>
+            <td th:text="${result.getMinPrice()}">[min_price]</td>
+            <td th:text="${result.getAvgPrice()}">[avg_price]</td>
+        </tr>
+    </table><br/>
+    <h2>Query 8</h2>
+    <table>
+        <tr>
+            <th>Manufacturer name</th>
+            <th>Product name</th>
+            <th>Min price</th>
+            <th>Max price</th>
+            <th>Avg price</th>
+        </tr>
+        <tr class="item" th:each="result: ${query8}">
+            <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
+            <td th:text="${result.getProductName()}">[product.name]</td>
+            <td th:text="${result.getMinPrice()}">[min_price]</td>
+            <td th:text="${result.getMinPrice()}">[min_price]</td>
+            <td th:text="${result.getAvgPrice()}">[avg_price]</td>
+        </tr>
+    </table><br/>
+    <h2>Query 9</h2>
+    <table>
+        <tr>
+            <th>Category Name</th>
+            <th>Number of products</th>
+        </tr>
+        <tr class="item" th:each="result: ${query9}">
+            <td th:text="${result.getCategoryName()}">[category.name]</td>
+            <td th:text="${result.getNumProducts}">[num_products]</td>
+        </tr>
+    </table>
+</th:block>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Admin Panel</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Query 7</h2>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Store name</th>-->
+<!--        <th>Min price</th>-->
+<!--        <th>Max price</th>-->
+<!--        <th>Avg price</th>-->
+<!--    </tr>-->
+<!--    <tr class="item" th:each="result: ${query7}">-->
+<!--        <td th:text="${result.getStoreName()}">[store.name]</td>-->
+<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
+<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
+<!--        <td th:text="${result.getAvgPrice()}">[avg_price]</td>-->
+<!--    </tr>-->
+<!--</table><br/>-->
+<!--<h2>Query 8</h2>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Manufacturer name</th>-->
+<!--        <th>Product name</th>-->
+<!--        <th>Min price</th>-->
+<!--        <th>Max price</th>-->
+<!--        <th>Avg price</th>-->
+<!--    </tr>-->
+<!--    <tr class="item" th:each="result: ${query8}">-->
+<!--        <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>-->
+<!--        <td th:text="${result.getProductName()}">[product.name]</td>-->
+<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
+<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
+<!--        <td th:text="${result.getAvgPrice()}">[avg_price]</td>-->
+<!--    </tr>-->
+<!--</table><br/>-->
+<!--<h2>Query 9</h2>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Category Name</th>-->
+<!--        <th>Number of products</th>-->
+<!--    </tr>-->
+<!--    <tr class="item" th:each="result: ${query9}">-->
+<!--        <td th:text="${result.getCategoryName()}">[category.name]</td>-->
+<!--        <td th:text="${result.getNumProducts}">[num_products]</td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->

@@ -30,20 +30,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findProductsByNameAndCategory(String name, Integer categoryId) {
-//        Category category = this.categoryRepository.findById(categoryId)
-//                .orElseThrow(CategoryIdNotFoundException::new);
-//        if(name != null && category != null){
-//            return this.productRepository.findAllByProductNameEqualsAndCategoriesContaining(name, category);
-//        }
-//        else if(name != null){
-//            return this.productRepository.findAllByProductNameEquals(name);
-//        }
-//        else if(category != null){
-//            return this.productRepository.findAllByCategoriesContaining(category);
-//        }
-//        else{
-//            return this.productRepository.findAll();
-//        }
-        return this.productRepository.findAllByProductNameEquals(name);
+        Category category = categoryId != null ? this.categoryRepository.findById(categoryId)
+                .orElse(null) : null;
+        if(name != null && category != null){
+            return this.productRepository.findAllByProductNameEqualsAndCategoriesContaining(name, category);
+        }
+        else if(name != null){
+            return this.productRepository.findAllByProductNameEquals(name);
+        }
+        else if(category != null){
+            return this.productRepository.findAllByCategoriesContaining(category);
+        }
+        else{
+            return this.productRepository.findAll();
+        }
     }
 }

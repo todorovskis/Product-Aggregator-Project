@@ -1,0 +1,36 @@
+<header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <section class="jumbotron" style="height: 20%;">
+        <div class="container">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="/">IT Product Aggregator</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item m-auto">
+                                <a class="nav-link active" href="/categories">Categories</a>
+                            </li>
+                            <li class="nav-item m-auto">
+                                <a class="nav-link active" href="/manufacturers">Manufacturers</a>
+                            </li>
+                            <li class="nav-item m-auto">
+                                <a class="nav-link active" href="/products">Products</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <th:block th:if="${#request.getRemoteUser() != null}"
+                      th:text="'Logged as: ' + ${#request.getRemoteUser()}"></th:block>
+            <div class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="btn btn-light btn-sm ml-3" href="/logout">
+                    <i></i>Logout
+                </a>
+            </div>
+        </div>
+    </section>
+</header>

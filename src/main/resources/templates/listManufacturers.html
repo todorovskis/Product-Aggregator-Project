@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Manufacturers</title>
-</head>
-<body>
-<ul>
-    <li th:each="manufacturer : ${manufacturers}" th:text="${manufacturer.getManufacturerName()}"></li>
-</ul>
-</body>
-</html>
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <ul>
+        <li th:each="manufacturer : ${manufacturers}" th:text="${manufacturer.getManufacturerName()}"></li>
+    </ul>
+</th:block>

@@ -25,10 +25,11 @@ public class Category {
     public Category() {
     }
 
-    public Category(Integer id, String categoryName, Category parentCategory) {
+    public Category(Integer id, String categoryName, Category parentCategory, List<Product> products) {
         this.id = id;
         this.categoryName = categoryName;
         this.parentCategory = parentCategory;
+        this.products = products;
     }
 
     public Integer getId() {
