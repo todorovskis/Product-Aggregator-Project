@@ -10,4 +10,6 @@ public interface ProductService {
 
     List<Product> findProductsByNameAndCategory(String name, Integer categoryId);
 
+    //TODO: FILTERING OF PRODUCTS
+
 }

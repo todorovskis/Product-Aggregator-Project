@@ -42,6 +42,7 @@ public class ProductController {
         }
         model.addAttribute("products", products);
         model.addAttribute("categories", this.categoryService.listCategories());
-        return "listProducts";
+        model.addAttribute("bodyContent", "listProducts");
+        return "master-template";
     }
 }

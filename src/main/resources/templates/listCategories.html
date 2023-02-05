@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Categories</title>
-</head>
-<body>
-<ul>
-    <li th:each="category : ${categories}" th:text="${category.getCategoryName()}"></li>
-</ul>
-</body>
-</html>
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <form th:action="@{'/categories'}" th:method="post">
+        <input type="text" th:name="input">
+        <button type="submit">Search</button>
+    </form>
+    <form th:each="category : ${categories}" th:action="@{'/categories/{id}' (id=${category.getId()})}" method="post">
+        <li>
+            <button type="submit" th:text="${category.getCategoryName()}"></button>
+        </li>
+    </form>
+</th:block>
