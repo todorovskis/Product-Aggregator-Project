@@ -1,6 +1,6 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
-    <h2>Query 1</h2>
-    <table>
+    <h2>Stores that offer all products from a given manufacturer</h2>
+    <table class="table table-striped">
         <tr>
             <th>Manufacturer name</th>
             <th>Store name</th>
@@ -14,8 +14,8 @@
             <td th:text="${result.getNumProductsInStorePerManufacturer()}">[num_products_in_store_per_manufacturer]</td>
         </tr>
     </table><br/>
-    <h2>Query 2</h2>
-    <table>
+    <h2>Store that offers the same products as a given store</h2>
+    <table class="table table-striped">
         <tr>
             <th>Store name</th>
             <th>Num products</th>
@@ -25,8 +25,8 @@
             <td th:text="${result.getNumProducts()}">[num_products]</td>
         </tr>
     </table><br/>
-    <h2>Query 3</h2>
-    <table>
+    <h2>Products with the highest average rating at category level</h2>
+    <table class="table table-striped">
         <tr>
             <th>Category name</th>
             <th>Product name</th>
@@ -38,8 +38,8 @@
             <th th:text="${result.getAvgRating()}">[avg_rating]</th>
         </tr>
     </table><br/>
-    <h2>Query 4</h2>
-    <table>
+    <h2>Number of comments and average rating for each product from each manufacturer</h2>
+    <table class="table table-striped">
         <tr>
             <th>Manufacturer name</th>
             <th>Product name</th>
@@ -53,8 +53,8 @@
             <th th:text="${result.getAvgRating()}">[avg_rating]</th>
         </tr>
     </table><br/>
-    <h2>Query 5</h2>
-    <table>
+    <h2>Favourite product for most users, by category</h2>
+    <table class="table table-striped">
         <tr>
             <th>Category name</th>
             <th>Product name</th>
@@ -66,8 +66,8 @@
             <td th:text="${result.getNumUsersFavourite()}">[num_users]</td>
         </tr>
     </table><br/>
-    <h2>Query 6</h2>
-    <table>
+    <h2>Product that appears the most in the list of favourite products</h2>
+    <table class="table table-striped">
         <tr>
             <th>Product name</th>
             <th>Number of users</th>
@@ -77,8 +77,8 @@
             <td th:text="${result.getNumUsersFavourite()}">[num_users]</td>
         </tr>
     </table><br/>
-    <h2>Query 7</h2>
-    <table>
+    <h2>Price range and average price of products from each store</h2>
+    <table class="table table-striped">
         <tr>
             <th>Store name</th>
             <th>Min price</th>
@@ -92,8 +92,8 @@
             <td th:text="${result.getAvgPrice()}">[avg_price]</td>
         </tr>
     </table><br/>
-    <h2>Query 8</h2>
-    <table>
+    <h2>Price range and average price of products from each manufacturer</h2>
+    <table class="table table-striped">
         <tr>
             <th>Manufacturer name</th>
             <th>Product name</th>
@@ -109,8 +109,8 @@
             <td th:text="${result.getAvgPrice()}">[avg_price]</td>
         </tr>
     </table><br/>
-    <h2>Query 9</h2>
-    <table>
+    <h2>Number of products by category</h2>
+    <table class="table table-striped">
         <tr>
             <th>Category Name</th>
             <th>Number of products</th>
@@ -121,56 +121,3 @@
         </tr>
     </table>
 </th:block>
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Admin Panel</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h2>Query 7</h2>-->
-<!--<table>-->
-<!--    <tr>-->
-<!--        <th>Store name</th>-->
-<!--        <th>Min price</th>-->
-<!--        <th>Max price</th>-->
-<!--        <th>Avg price</th>-->
-<!--    </tr>-->
-<!--    <tr class="item" th:each="result: ${query7}">-->
-<!--        <td th:text="${result.getStoreName()}">[store.name]</td>-->
-<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
-<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
-<!--        <td th:text="${result.getAvgPrice()}">[avg_price]</td>-->
-<!--    </tr>-->
-<!--</table><br/>-->
-<!--<h2>Query 8</h2>-->
-<!--<table>-->
-<!--    <tr>-->
-<!--        <th>Manufacturer name</th>-->
-<!--        <th>Product name</th>-->
-<!--        <th>Min price</th>-->
-<!--        <th>Max price</th>-->
-<!--        <th>Avg price</th>-->
-<!--    </tr>-->
-<!--    <tr class="item" th:each="result: ${query8}">-->
-<!--        <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>-->
-<!--        <td th:text="${result.getProductName()}">[product.name]</td>-->
-<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
-<!--        <td th:text="${result.getMinPrice()}">[min_price]</td>-->
-<!--        <td th:text="${result.getAvgPrice()}">[avg_price]</td>-->
-<!--    </tr>-->
-<!--</table><br/>-->
-<!--<h2>Query 9</h2>-->
-<!--<table>-->
-<!--    <tr>-->
-<!--        <th>Category Name</th>-->
-<!--        <th>Number of products</th>-->
-<!--    </tr>-->
-<!--    <tr class="item" th:each="result: ${query9}">-->
-<!--        <td th:text="${result.getCategoryName()}">[category.name]</td>-->
-<!--        <td th:text="${result.getNumProducts}">[num_products]</td>-->
-<!--    </tr>-->
-<!--</table>-->
-<!--</body>-->
-<!--</html>-->

@@ -1,6 +1,7 @@
 package com.example.product_aggregator_project.service.impl;
 
 import com.example.product_aggregator_project.model.ProductCharacteristic;
+import com.example.product_aggregator_project.model.exceptions.CharacteristicIdNotFoundException;
 import com.example.product_aggregator_project.repository.ProductCharacteristicRepository;
 import com.example.product_aggregator_project.service.ProductCharacteristicService;
 import org.springframework.stereotype.Service;

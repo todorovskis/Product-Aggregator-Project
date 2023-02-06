@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add product</title>
+</head>
+<body>
+<!-- The form should submit to StudentController.create or StudentController.update,
+     depending on whether we are creating or editing an entity -->
+<form method="POST" th:action="@{'/products/{id}' (id=${product?.getId()})}">
+    <div>
+        <label for="productName">Product name</label>
+        <input type="text"
+               id="productName"
+               name="productName"
+               th:value="${product?.getName()}"
+               required>
+    </div>
+
+    <div>
+        <label for="postDate">Post Date</label>
+        <input type="date"
+               id="postDate"
+               name="postDate"
+               th:value="${student?.getPostDate()}"
+               required>
+    </div>
+    <div>
+        <label>Category</label><br/>
+        <select id="categoryId" name="categoryId" multiple>
+            <!-- For each type you should have one <option> like below  -->
+            <option name="categoryId" th:each="category: ${categories}"
+                    th:value="${category.getId()}" th:text="${category.getCategoryName()}"> [category_name]</option>
+        </select>
+    </div>
+    <div>
+        <label>Manufacturer</label><br/>
+        <select id="manufacturerId"  name="manufacturerId">
+            <!-- For each course you should have one <option> like below  -->
+            <option th:each="manufacturer: ${manufacturers}"
+                    th:value="${manufacturer.getId()}" th:text="${manufacturer.getManufacturerName()}"> [manufacturer_name]</option>
+        </select>
+    </div>
+    <div>
+        <label for="characteristicDesc">Description</label>
+        <input type="text"
+               id="characteristicDesc"
+               name="characteristicDesc"
+               th:value="${product?.getCharacteristicDescription()}"
+               required>
+    </div>
+
+    <button id="submit" type="submit">Submit</button>
+    <a id="back" href="/products" type="button" class="btn btn-primary">Back to products</a>
+</form>
+
+</body>
+</html>

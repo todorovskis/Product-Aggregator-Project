@@ -33,7 +33,7 @@ public class Product {
 
     @OneToOne
     @JoinColumn(name = "characteristic_id")
-    private ProductCharacteristic characteristicId;
+    private ProductCharacteristic characteristic;
 
     @OneToMany(mappedBy = "product")
     private List<Rating> ratings;
@@ -56,13 +56,21 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer id, String productName, LocalDate postDate, Manufacturer manufacturer, List<Category> categories, ProductCharacteristic characteristicId) {
+    public Product(Integer id, String productName, LocalDate postDate, Manufacturer manufacturer, List<Category> categories, ProductCharacteristic characteristic) {
         this.id = id;
         this.productName = productName;
         this.postDate = postDate;
         this.manufacturer = manufacturer;
         this.categories = categories;
-        this.characteristicId = characteristicId;
+        this.characteristic = characteristic;
+    }
+
+    public Product(String productName, Category category, Manufacturer manufacturer, LocalDate postDate, ProductCharacteristic characteristic){
+        this.productName = productName;
+
+        this.manufacturer = manufacturer;
+        this.postDate = postDate;
+        this.characteristic = characteristic;
     }
 
     public Integer getId() {
@@ -105,12 +113,12 @@ public class Product {
         this.categories = categories;
     }
 
-    public ProductCharacteristic getCharacteristicId() {
-        return characteristicId;
+    public ProductCharacteristic getCharacteristic() {
+        return characteristic;
     }
 
-    public void setCharacteristicId(ProductCharacteristic characteristicId) {
-        this.characteristicId = characteristicId;
+    public void setCharacteristic(ProductCharacteristic characteristicId) {
+        this.characteristic = characteristicId;
     }
 
     public List<ProductInstance> getProductInstances() {

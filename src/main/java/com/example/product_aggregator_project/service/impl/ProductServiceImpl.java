@@ -3,6 +3,9 @@ package com.example.product_aggregator_project.service.impl;
 import com.example.product_aggregator_project.model.Category;
 import com.example.product_aggregator_project.model.Manufacturer;
 import com.example.product_aggregator_project.model.Product;
+import com.example.product_aggregator_project.model.ProductCharacteristic;
+import com.example.product_aggregator_project.model.exceptions.CategoryIdNotFoundException;
+import com.example.product_aggregator_project.model.exceptions.ManufacturerIdNotFoundException;
 import com.example.product_aggregator_project.model.exceptions.ProductIdNotFoundException;
 import com.example.product_aggregator_project.repository.CategoryRepository;
 
@@ -11,6 +14,7 @@ import com.example.product_aggregator_project.repository.ProductRepository;
 import com.example.product_aggregator_project.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +42,19 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(Integer productId) {
         return this.productRepository.findById(productId)
                 .orElseThrow(ProductIdNotFoundException::new);
+    }
+
+    @Override
+    public Product addProduct(String productName, Integer categoryId, Integer manufacturerId, LocalDate postDate, String characteristicDesc) {
+        Category category = this.categoryRepository.findById(categoryId)
+                .orElseThrow(CategoryIdNotFoundException::new);
+        Manufacturer manufacturer = this.manufacturerRepository.findById(manufacturerId)
+                .orElseThrow(ManufacturerIdNotFoundException::new);
+        ProductCharacteristic characteristic = new ProductCharacteristic(characteristicDesc);
+
+        Product product = new Product(productName, category, manufacturer, postDate, characteristic);
+
+        return this.productRepository.save(product);
     }
 
     @Override

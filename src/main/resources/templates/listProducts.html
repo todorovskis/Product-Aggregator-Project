@@ -1,6 +1,6 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <body>
-    <form th:method="POST">
+    <form th:method="POST" th:action="@{'/products/show'}">
         <label for="productName">Product name</label>
         <input id="productName" type="text" name="productName"/>
         <label for="categoryId">Category</label>
@@ -22,5 +22,10 @@
             <button type="submit" th:text="${product.getProductName()}"></button>
         </li>
     </form>
+    <div>
+        <a href="/products/add" class="add-item">
+            Add new product
+        </a>
+    </div>
     </body>
 </th:block>

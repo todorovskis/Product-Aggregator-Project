@@ -3,11 +3,13 @@
       <ul>
           <li th:text="'Model: ' + ${product?.getProductName()}"></li>
           <li th:text="'Manufacturer: ' + ${product?.getManufacturer()?.getManufacturerName()}"></li>
+          <li th:text="'Category: ' + ${category?.getCategoryName()}"></li>
           <li th:each="instance: ${product?.getProductInstances()}">
-              <div th:text="${instance?.getStore()?.getStoreName()} + ': ' +
+              <div th:text="'Price in ' + ' ' + ${instance?.getStore()?.getStoreName()} + ': ' +
                     ${instance?.getPrice()} + ' den.'">
               </div>
           </li>
+          <li th:text="'Description: ' + ${product?.getCharacteristic().getCharacteristicDescription()}"></li>
 
       </ul>
 <!--    </form>-->

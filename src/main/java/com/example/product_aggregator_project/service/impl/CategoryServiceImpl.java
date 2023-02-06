@@ -47,6 +47,17 @@ public class CategoryServiceImpl implements CategoryService {
         return products.stream().distinct().collect(Collectors.toList());
     }
 
+    @Override
+    public Category findCategoryInProductCategories(Product product) {
+      for(Category c1: this.categoryRepository.findAll()){
+          for(Category c2: product.getCategories()){
+              if(c1.getId().equals(c2.getId()))
+                  return c1;
+          }
+      }
+      return null;
+    }
+
     private void addProducts(Category category, List<Product> products) {
         products.addAll(category.getProducts());
         category.getSubcategories().forEach(s -> addProducts(s, products));

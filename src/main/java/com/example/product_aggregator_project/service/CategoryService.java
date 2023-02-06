@@ -14,4 +14,6 @@ public interface CategoryService {
     List<Category> listCategoriesByInput(String input);
 
     List<Product> listProductsByCategory(Integer categoryId);
+
+    Category findCategoryInProductCategories(Product product);
 }
