@@ -10,14 +10,15 @@ import com.example.product_aggregator_project.model.exceptions.ProductIdNotFound
 import com.example.product_aggregator_project.repository.CategoryRepository;
 
 import com.example.product_aggregator_project.repository.ManufacturerRepository;
+import com.example.product_aggregator_project.repository.ProductCharacteristicRepository;
 import com.example.product_aggregator_project.repository.ProductRepository;
+import com.example.product_aggregator_project.service.CategoryService;
 import com.example.product_aggregator_project.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -25,12 +26,19 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ManufacturerRepository manufacturerRepository;
+    private final ProductCharacteristicRepository characteristicRepository;
+    private final CategoryService categoryService;
 
 
-    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository, ManufacturerRepository manufacturerRepository) {
+    public ProductServiceImpl(ProductRepository productRepository,
+                              CategoryRepository categoryRepository,
+                              ManufacturerRepository manufacturerRepository,
+                              ProductCharacteristicRepository characteristicRepository, CategoryService categoryService) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.manufacturerRepository = manufacturerRepository;
+        this.characteristicRepository = characteristicRepository;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -51,8 +59,9 @@ public class ProductServiceImpl implements ProductService {
         Manufacturer manufacturer = this.manufacturerRepository.findById(manufacturerId)
                 .orElseThrow(ManufacturerIdNotFoundException::new);
         ProductCharacteristic characteristic = new ProductCharacteristic(characteristicDesc);
+        this.characteristicRepository.save(characteristic);
 
-        Product product = new Product(productName, category, manufacturer, postDate, characteristic);
+        Product product = setProductProperties(productName, manufacturer, postDate, characteristic, category);
 
         return this.productRepository.save(product);
     }
@@ -66,24 +75,24 @@ public class ProductServiceImpl implements ProductService {
 
         if (name != null && category != null && manufacturer != null) {
             return this.productRepository
-                    .findAllByProductNameContainingIgnoreCaseAndCategoriesContainingAndManufacturerEquals(name, category, manufacturer);
+                    .findAllByProductNameContainingIgnoreCaseAndCategoryEqualsAndManufacturerEquals(name, category, manufacturer);
         } else if (name != null && category != null) {
             return this.productRepository
-                    .findAllByProductNameContainingIgnoreCaseAndCategoriesContaining(name, category);
+                    .findAllByProductNameContainingIgnoreCaseAndCategoryEquals(name, category);
         } else if (name != null && manufacturer != null) {
             return this.productRepository
                     .findAllByProductNameContainingIgnoreCaseAndManufacturerEquals(name, manufacturer);
         } else if (category != null && manufacturer != null) {
             return this.productRepository
-                    .findAllByCategoriesContainingAndManufacturerEquals(category, manufacturer);
+                    .findAllByCategoryEqualsAndManufacturerEquals(category, manufacturer);
         } else if (name != null) {
             return this.productRepository.findByProductNameContainingIgnoreCase(name);
         } else if (category != null) {
             List<Product> products = new ArrayList<>();
             addProducts(category, products);
 
-            //return this.productRepository.findAllByCategoriesContaining(category);
-            return products.stream().distinct().collect(Collectors.toList());
+            return this.productRepository.findAllByCategoryEquals(category);
+            //return products.stream().distinct().collect(Collectors.toList());
         } else if (manufacturer != null) {
             return this.productRepository.findAllByManufacturerEquals(manufacturer);
         } else {
@@ -91,9 +100,24 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-
     private void addProducts(Category category, List<Product> products) {
         products.addAll(category.getProducts());
         category.getSubcategories().forEach(s -> addProducts(s, products));
+    }
+
+    private Product setProductProperties(String productName, Manufacturer manufacturer, LocalDate postDate,
+                                      ProductCharacteristic characteristic, Category category){
+
+        List<Category> allCategories = this.categoryService.findAllParentCategories(category);
+
+        Category mainCategory = allCategories.get(allCategories.size() - 1);
+        Product product = new Product(productName, mainCategory, manufacturer, postDate, characteristic);
+        product.setCategory(mainCategory);
+        allCategories.remove(allCategories.size() - 1);
+        product.setCategories(allCategories);
+        product.setManufacturer(manufacturer);
+        product.setCharacteristic(characteristic);
+
+        return product;
     }
 }

@@ -1,7 +1,10 @@
 package com.example.product_aggregator_project.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "productimages")
 public class ProductImage {
@@ -24,30 +27,6 @@ public class ProductImage {
     public ProductImage(Integer id, String imageUrl, Product product) {
         this.id = id;
         this.imageUrl = imageUrl;
-        this.product = product;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
         this.product = product;
     }
 }

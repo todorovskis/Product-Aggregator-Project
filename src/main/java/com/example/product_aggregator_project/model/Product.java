@@ -1,9 +1,16 @@
 package com.example.product_aggregator_project.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "products")
 public class Product {
@@ -13,15 +20,18 @@ public class Product {
     @Column(name = "product_id")
     private Integer id;
 
-    @Column(name = "product_name")
+    @Column(unique = true)
     private String productName;
 
-    @Column(name = "post_date")
     private LocalDate postDate;
 
     @ManyToOne
-    @JoinColumn(nullable = false, name = "manufacturer_id")
+    @JoinColumn( name = "manufacturer_id", nullable = false)
     private Manufacturer manufacturer;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @ManyToMany
     @JoinTable(
@@ -32,7 +42,7 @@ public class Product {
     private List<Category> categories;
 
     @OneToOne
-    @JoinColumn(name = "characteristic_id")
+    @JoinColumn(name = "characteristic_id", nullable = false)
     private ProductCharacteristic characteristic;
 
     @OneToMany(mappedBy = "product")
@@ -54,6 +64,7 @@ public class Product {
     private List<ProductImage> productImages;
 
     public Product() {
+
     }
 
     public Product(Integer id, String productName, LocalDate postDate, Manufacturer manufacturer, List<Category> categories, ProductCharacteristic characteristic) {
@@ -68,64 +79,12 @@ public class Product {
     public Product(String productName, Category category, Manufacturer manufacturer, LocalDate postDate, ProductCharacteristic characteristic){
         this.productName = productName;
 
+        if(this.categories == null){
+            this.categories = new ArrayList<>();
+        }
+        this.categories.add(category);
         this.manufacturer = manufacturer;
         this.postDate = postDate;
         this.characteristic = characteristic;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public LocalDate getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(LocalDate postDate) {
-        this.postDate = postDate;
-    }
-
-    public Manufacturer getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(Manufacturer manufacturerId) {
-        this.manufacturer = manufacturerId;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public ProductCharacteristic getCharacteristic() {
-        return characteristic;
-    }
-
-    public void setCharacteristic(ProductCharacteristic characteristicId) {
-        this.characteristic = characteristicId;
-    }
-
-    public List<ProductInstance> getProductInstances() {
-        return productInstances;
-    }
-
-    public void setProductInstances(List<ProductInstance> productInstances) {
-        this.productInstances = productInstances;
     }
 }

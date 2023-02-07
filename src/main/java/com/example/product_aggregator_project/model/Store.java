@@ -1,8 +1,11 @@
 package com.example.product_aggregator_project.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "stores")
 public class Store {
@@ -12,7 +15,7 @@ public class Store {
     @Column(name = "store_id")
     private Integer id;
 
-    @Column(name = "store_name")
+    @Column(unique = true)
     private String storeName;
 
     @OneToMany(mappedBy = "store")
@@ -26,19 +29,4 @@ public class Store {
         this.storeName = storeName;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
 }

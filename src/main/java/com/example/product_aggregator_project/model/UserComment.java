@@ -1,7 +1,10 @@
 package com.example.product_aggregator_project.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "usercomments")
 public class UserComment {
@@ -11,7 +14,6 @@ public class UserComment {
     @Column(name = "comment_id")
     private Integer id;
 
-    @Column(name = "user_comment")
     private String userComment;
 
     @ManyToOne
@@ -32,35 +34,4 @@ public class UserComment {
         this.product = product;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserComment() {
-        return userComment;
-    }
-
-    public void setUserComment(String userComment) {
-        this.userComment = userComment;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 }

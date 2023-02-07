@@ -2,15 +2,14 @@ package com.example.product_aggregator_project.web;
 
 import com.example.product_aggregator_project.model.Category;
 import com.example.product_aggregator_project.model.Product;
-import com.example.product_aggregator_project.model.ProductCharacteristic;
 import com.example.product_aggregator_project.service.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -67,7 +66,7 @@ public class ProductController {
     @PostMapping("/{id}")
     public String getProductInfo(@PathVariable Integer id, Model model){
         Product product = this.productService.findById(id);
-        Category category = this.categoryService.findCategoryInProductCategories(product);
+        Category category = this.categoryService.findById(product.getCategory().getId());
 
         model.addAttribute("category", category);
         model.addAttribute("product", product);
@@ -79,7 +78,7 @@ public class ProductController {
     public String showAddPage(Model model){
         model.addAttribute("products", this.productService.listProducts());
         model.addAttribute("manufacturers", this.manufacturerService.listManufacturers());
-        model.addAttribute("categories", this.categoryService.listCategories());
+        model.addAttribute("categories", this.categoryService.findCategoriesWithParentCategory());
         model.addAttribute("stores", this.storeService.listStores());
 
         model.addAttribute("bodyContent", "add-product");

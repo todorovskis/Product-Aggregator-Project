@@ -1,7 +1,13 @@
 package com.example.product_aggregator_project.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "productcharacteristics")
 public class ProductCharacteristic {
@@ -11,7 +17,7 @@ public class ProductCharacteristic {
     @Column(name = "characteristic_id")
     private Integer id;
 
-    @Column(name = "characteristic_description", unique = true)
+    @Column(unique = true)
     private String characteristicDescription;
 
     @OneToOne(mappedBy = "characteristic")
@@ -29,20 +35,5 @@ public class ProductCharacteristic {
         this.characteristicDescription = characteristicDescription;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCharacteristicDescription() {
-        return characteristicDescription;
-    }
-
-    public void setCharacteristicDescription(String characteristicDescription) {
-        this.characteristicDescription = characteristicDescription;
-    }
 }
 

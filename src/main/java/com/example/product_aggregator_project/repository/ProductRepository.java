@@ -11,17 +11,17 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    List<Product> findByProductNameContainingIgnoreCase(String productName);
+    List<Product> findAllByCategoryEquals(Category category);
 
-    List<Product> findAllByCategoriesContaining(Category category);
+    List<Product> findByProductNameContainingIgnoreCase(String productName);
 
     List<Product> findAllByManufacturerEquals(Manufacturer manufacturer);
 
-    List<Product> findAllByProductNameContainingIgnoreCaseAndCategoriesContaining(String productName, Category category);
+    List<Product> findAllByProductNameContainingIgnoreCaseAndCategoryEquals(String productName, Category category);
 
     List<Product> findAllByProductNameContainingIgnoreCaseAndManufacturerEquals(String productName, Manufacturer manufacturer);
 
-    List<Product> findAllByCategoriesContainingAndManufacturerEquals(Category category, Manufacturer manufacturer);
+    List<Product> findAllByCategoryEqualsAndManufacturerEquals(Category category, Manufacturer manufacturer);
 
-    List<Product> findAllByProductNameContainingIgnoreCaseAndCategoriesContainingAndManufacturerEquals(String name, Category category, Manufacturer manufacturer);
+    List<Product> findAllByProductNameContainingIgnoreCaseAndCategoryEqualsAndManufacturerEquals(String name, Category category, Manufacturer manufacturer);
 }

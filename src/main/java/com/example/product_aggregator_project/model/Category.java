@@ -1,8 +1,11 @@
 package com.example.product_aggregator_project.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -12,7 +15,7 @@ public class Category {
     @Column(name = "category_id")
     private Integer id;
 
-    @Column(name = "category_name")
+    @Column(unique = true)
     private String categoryName;
 
     @ManyToOne
@@ -25,6 +28,9 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private List<Product> products;
 
+    @OneToMany(mappedBy = "category")
+    private List<Product> productList;
+
     public Category() {
     }
 
@@ -35,43 +41,4 @@ public class Category {
         this.products = products;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Category getParentCategory() {
-        return parentCategory;
-    }
-
-    public void setParentCategory(Category parentCategory) {
-        this.parentCategory = parentCategory;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public List<Category> getSubcategories() {
-        return subcategories;
-    }
-
-    public void setSubcategories(List<Category> subcategories) {
-        this.subcategories = subcategories;
-    }
 }

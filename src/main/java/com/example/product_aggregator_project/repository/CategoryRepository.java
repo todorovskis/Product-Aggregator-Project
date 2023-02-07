@@ -12,5 +12,7 @@ import java.util.Optional;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     List<Category> findByCategoryNameContainingIgnoreCase(String input);
+
+    List<Category> findAllByParentCategoryIsNotNull();
 }
 

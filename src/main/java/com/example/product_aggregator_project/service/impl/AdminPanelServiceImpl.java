@@ -31,6 +31,7 @@ public class AdminPanelServiceImpl implements AdminPanelService {
             ProductDetailsPerStoreRepository productDetailsPerStoreRepository,
             ProductDetailsPerManufacturerRepository productDetailsPerManufacturerRepository,
             ProductNumberPerCategoryRepository productNumberPerCategoryRepository) {
+
         this.storesWithAllManufacturerProductsRepository = storesWithAllManufacturerProductsRepository;
         this.storesWithSameProductsOfferRepository = storesWithSameProductsOfferRepository;
         this.highestAvgProductRatingPerCategoryRepository = highestAvgProductRatingPerCategoryRepository;

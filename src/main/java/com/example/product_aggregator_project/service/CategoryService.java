@@ -15,5 +15,7 @@ public interface CategoryService {
 
     List<Product> listProductsByCategory(Integer categoryId);
 
-    Category findCategoryInProductCategories(Product product);
+    List<Category> findCategoriesWithParentCategory();
+
+    List<Category> findAllParentCategories(Category category);
 }

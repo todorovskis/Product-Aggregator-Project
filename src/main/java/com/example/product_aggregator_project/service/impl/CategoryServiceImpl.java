@@ -48,14 +48,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findCategoryInProductCategories(Product product) {
-      for(Category c1: this.categoryRepository.findAll()){
-          for(Category c2: product.getCategories()){
-              if(c1.getId().equals(c2.getId()))
-                  return c1;
-          }
-      }
-      return null;
+    public List<Category> findCategoriesWithParentCategory() {
+        return this.categoryRepository.findAllByParentCategoryIsNotNull();
+    }
+
+    @Override
+    public List<Category> findAllParentCategories(Category category) {
+        List<Category> categoriesList = new ArrayList<>();
+        while (category.getParentCategory() != null){
+            categoriesList.add(category.getParentCategory());
+            category = category.getParentCategory();
+        }
+        return categoriesList;
     }
 
     private void addProducts(Category category, List<Product> products) {
