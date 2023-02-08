@@ -1,6 +1,7 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
 <!--    <form th:method="POST" th:action="@{'/products/{id}' (id=${product?.getId()})}">-->
-      <ul>
+    <img th:src="@{'/pictures/products/' + ${product.getId()} + '.jpg'}"  alt="Product Image" style="width:150px; height:150px;"/>
+    <ul>
           <li th:text="'Model: ' + ${product?.getProductName()}"></li>
           <li th:text="'Manufacturer: ' + ${product?.getManufacturer()?.getManufacturerName()}"></li>
           <li th:text="'Category: ' + ${category?.getCategoryName()}"></li>

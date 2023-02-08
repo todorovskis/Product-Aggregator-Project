@@ -23,7 +23,7 @@
         </li>
     </form>
     <div>
-        <a href="/products/add" class="add-item">
+        <a href="/products/add" class="add-item" sec:authorize="hasRole('ROLE_ADMIN')">
             Add new product
         </a>
     </div>
