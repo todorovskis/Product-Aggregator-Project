@@ -1,10 +1,14 @@
-<header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <section class="jumbotron" style="background-color: transparent">
+<header style="background-color: white;"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <section >
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="background-color: transparent !important;">
                 <div class="container">
-                    <img src="../../pictures/logo-picture.png" height="50" width="50"/>
-                    <a class="navbar-brand" href="/" style="color: #FF595A !important;"> IT Product Aggregator</a>
+<!--                    <img src="../../static/pictures/logo-picture.png" height="121" width="177"/>-->
+<!--                    <img th:src="@{'/pictures/logo-picture.png'}" height="50" width="80"/>-->
+<!--                    <img src="../../static/pictures/logo-picture.png" height="50" width="60"/>-->
+                    <img src="/pictures/logo-picture.png" height="50" width="60"/>
+<!--                    <img src="../../static/pictures/logo-picture.png" height="50px" width="50px"/>-->
+                    <a class="navbar-brand" href="/" style="color: #4b7fb7 !important;"> IT Product Aggregator</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -24,7 +28,7 @@
                             <li class="nav-item m-auto">
                                 <a class="nav-link active" href="/products">Products</a>
                             </li>
-                            <li class="nav-item m-auto" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <li class="nav-item m-auto" sec:authorize="hasRole('ADMIN')">
                                 <a class="nav-link active" href="/panel">Admin panel</a>
                             </li>
                             <li class="nav-item">
@@ -43,12 +47,13 @@
             </nav>
             <th:block th:if="${#request.getRemoteUser() != null}"
                       th:text="'Logged as: ' + ${#request.getRemoteUser()}"></th:block>
-            <div class="nav-item" sec:authorize="isAuthenticated()">
+            <div class="nav-item" th:if="${#request.getRemoteUser() != null}" sec:authorize="isAuthenticated()">
                 <a class="btn btn-light btn-sm ml-3" href="/logout">
                     <i>Logout</i>
                 </a>
             </div>
         </div>
     </section>
+    <hr style="background-color: #30598f">
 </header>
 
