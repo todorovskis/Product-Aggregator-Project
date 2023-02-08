@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //TODO: If you are implementing the security requirements, remove this following line
-        web.ignoring().antMatchers("/**");
+//        web.ignoring().antMatchers("/**");
     }
 
     @Override
@@ -32,13 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/categories", "/manufacturers",
-                        "/products").permitAll()
-                .anyRequest().hasRole("ADMIN")
+                .antMatchers("/**").permitAll()
+                .anyRequest().hasRole("Administrator")
                 .and()
                 .formLogin().permitAll()
                 .failureUrl("/login?error=BadCredentials")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/home", true)
                 .and()
                 .logout()
                 .clearAuthentication(true)

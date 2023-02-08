@@ -4,8 +4,7 @@
     <title>Add product</title>
 </head>
 <body>
-<!-- The form should submit to StudentController.create or StudentController.update,
-     depending on whether we are creating or editing an entity -->
+
 <form method="POST" th:action="@{'/products/{id}' (id=${product?.getId()})}">
     <div>
         <label for="productName">Product name</label>

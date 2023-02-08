@@ -92,7 +92,6 @@ public class ProductServiceImpl implements ProductService {
             addProducts(category, products);
 
             return this.productRepository.findAllByCategoryEquals(category);
-            //return products.stream().distinct().collect(Collectors.toList());
         } else if (manufacturer != null) {
             return this.productRepository.findAllByManufacturerEquals(manufacturer);
         } else {

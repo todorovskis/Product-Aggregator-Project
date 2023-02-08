@@ -24,18 +24,20 @@
                             <li class="nav-item m-auto">
                                 <a class="nav-link active" href="/products">Products</a>
                             </li>
-                            <li class="nav-item m-auto" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <li class="nav-item m-auto" sec:authorize="hasRole('Administrator')">
                                 <a class="nav-link active" href="/panel">Admin panel</a>
                             </li>
-                            <li class="nav-item">
-                                <button type="submit" class="btn btn-light btn-sm ml-3"
+                            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                                <a class="btn btn-light btn-sm ml-3"
                                     href="/login">
                                     Login
-                                </button>
-                                <button type="submit" class="btn btn-light btn-sm ml-3"
+                                </a>
+                            </li>
+                            <li>
+                                <a class="btn btn-light btn-sm ml-3" sec:authorize="!isAuthenticated()"
                                         href="/register">
                                     Register
-                                </button>
+                                </a>
                             </li>
                         </ul>
                     </div>
