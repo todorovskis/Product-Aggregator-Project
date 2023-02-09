@@ -1,18 +1,20 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
 <!--    <form th:method="POST" th:action="@{'/products/{id}' (id=${product?.getId()})}">-->
-    <img th:src="@{'/pictures/products/' + ${product.getId()} + '.jpg'}"  alt="Product Image" style="width:150px; height:150px;"/>
-    <ul>
-          <li th:text="'Model: ' + ${product?.getProductName()}"></li>
-          <li th:text="'Manufacturer: ' + ${product?.getManufacturer()?.getManufacturerName()}"></li>
-          <li th:text="'Category: ' + ${category?.getCategoryName()}"></li>
-          <li th:each="instance: ${product?.getProductInstances()}">
-              <div th:text="'Price in ' + ' ' + ${instance?.getStore()?.getStoreName()} + ': ' +
+    <div style="display: flex; align-items: center">
+        <img th:src="@{'/pictures/products/' + ${product.getId()} + '.jpg'}"  alt="Product Image"
+             style="width:400px; height:400px;"/>
+        <ul style="font-size: 18px">
+            <li th:text="'Model: ' + ${product?.getProductName()}"></li>
+            <li th:text="'Manufacturer: ' + ${product?.getManufacturer()?.getManufacturerName()}"></li>
+            <li th:text="'Category: ' + ${category?.getCategoryName()}"></li>
+            <li th:each="instance: ${product?.getProductInstances()}">
+                <div th:text="'Price in ' + ' ' + ${instance?.getStore()?.getStoreName()} + ': ' +
                     ${instance?.getPrice()} + ' den.'">
-              </div>
-          </li>
-          <li th:text="'Description: ' + ${product?.getCharacteristic().getCharacteristicDescription()}"></li>
-
-      </ul>
-    <a id="back" href="/products" type="button" class="btn btn-primary">Back to products</a>
+                </div>
+            </li>
+            <li th:text="'Description: ' + ${product?.getCharacteristic().getCharacteristicDescription()}"></li>
+        </ul>
+    </div>
+    <a style="font-size: 18px; margin-top: 10px;" id="back" href="/products" type="button" class="btn btn-primary">Back to products</a>
 <!--    </form>-->
 </th:block>
