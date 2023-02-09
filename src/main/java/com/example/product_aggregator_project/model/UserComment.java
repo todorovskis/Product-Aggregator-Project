@@ -1,10 +1,13 @@
 package com.example.product_aggregator_project.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "usercomments")
 public class UserComment {

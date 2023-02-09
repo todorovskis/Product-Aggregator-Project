@@ -4,26 +4,41 @@
         <label for="productName">Product name</label>
         <input id="productName" type="text" name="productName"/>
         <label for="categoryId">Category</label>
-        <select id="categoryId" name="categoryId">
+        <select id="categoryId" name="categoryId" class="btn dropdown-toggle" style="background: #4b7fb7">
             <option value="">All categories</option>
             <option th:each="category: ${categories}" th:value="${category.getId()}"
                     th:text="${category.getCategoryName()}"></option>
         </select>
         <label for="manufacturerId">Manufacturer</label>
-        <select id="manufacturerId" name="manufacturerId">
+        <select id="manufacturerId" name="manufacturerId" class="btn dropdown-toggle" style="background: #4b7fb7">
             <option value="">All manufacturers</option>
             <option th:each="manufacturer: ${manufacturers}" th:value="${manufacturer.getId()}"
                     th:text="${manufacturer.getManufacturerName()}"></option>
         </select>
-        <button id="filterName" type="submit">Filter</button>
+        <button id="filterName" type="submit" class="btn" style="background: #4b7fb7">Filter</button>
     </form>
-    <form th:method="post" th:each="product: ${products}" th:action="@{'/products/{id}' (id=${product.getId()})}">
-        <li>
-            <button type="submit" th:text="${product.getProductName()}"></button>
-        </li>
-    </form>
+
+
+    <div style="display: flex; flex-wrap: wrap;">
+        <ol class="list" th:each="product : ${products}">
+            <li>
+                <form th:action="@{'/products/{id}' (id=${product.getId()})}"
+                      th:method="post" >
+                    <button type="submit" style="background: none; border: none; cursor: pointer;">
+                        <a th:text="${product.getProductName()}"></a>
+                    </button>
+                </form>
+            </li>
+        </ol>
+    </div>
+<!--    -->
+<!--    <form th:method="post" th:each="product: ${products}" th:action="@{'/products/{id}' (id=${product.getId()})}">-->
+<!--        <li>-->
+<!--            <button type="submit" th:text="${product.getProductName()}"></button>-->
+<!--        </li>-->
+<!--    </form>-->
     <div>
-        <a href="/products/add" class="add-item" sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/products/add" class="add-item" >
             Add new product
         </a>
     </div>

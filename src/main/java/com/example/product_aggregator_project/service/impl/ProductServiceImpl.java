@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -62,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
         this.characteristicRepository.save(characteristic);
 
         Product product = setProductProperties(productName, manufacturer, postDate, characteristic, category);
+        product.getCategories().forEach(c -> c.getProducts().add(product));
 
         return this.productRepository.save(product);
     }
@@ -73,25 +75,50 @@ public class ProductServiceImpl implements ProductService {
         Manufacturer manufacturer = manufacturerId != null ? this.manufacturerRepository.findById(manufacturerId)
                 .orElse(null) : null;
 
-        if (name != null && category != null && manufacturer != null) {
-            return this.productRepository
-                    .findAllByProductNameContainingIgnoreCaseAndCategoryEqualsAndManufacturerEquals(name, category, manufacturer);
-        } else if (name != null && category != null) {
-            return this.productRepository
-                    .findAllByProductNameContainingIgnoreCaseAndCategoryEquals(name, category);
-        } else if (name != null && manufacturer != null) {
+        return filterProducts(name, category, manufacturer);
+    }
+
+    private List<Product> filterProducts(String name, Category category, Manufacturer manufacturer) {
+        List<Product> products = new ArrayList<>();
+
+        if (!name.isEmpty() && category != null && manufacturer != null) {
+            if (category.getParentCategory() == null)
+                return this.productRepository
+                        .findAllByProductNameContainingIgnoreCaseAndCategoryEqualsAndManufacturerEquals(name, category, manufacturer);
+            else
+                return this.categoryService.listProductsByCategory(category.getId());
+        } else if (!name.isEmpty() && category != null) {
+            if (category.getParentCategory() == null)
+                return this.productRepository
+                        .findAllByProductNameContainingIgnoreCaseAndCategoryEquals(name, category);
+            else {
+                products.addAll(this.categoryService.listProductsByCategory(category.getId()));
+                return products.stream().
+                        filter(p -> p.getProductName().toLowerCase()
+                                .contains(name.toLowerCase())).collect(Collectors.toList());
+            }
+        } else if (!name.isEmpty() && manufacturer != null) {
             return this.productRepository
                     .findAllByProductNameContainingIgnoreCaseAndManufacturerEquals(name, manufacturer);
         } else if (category != null && manufacturer != null) {
-            return this.productRepository
+            if (category.getParentCategory() == null)
+                return this.productRepository
                     .findAllByCategoryEqualsAndManufacturerEquals(category, manufacturer);
-        } else if (name != null) {
+            else{
+                products.addAll(this.categoryService.listProductsByCategory(category.getId()));
+                return products.stream().
+                        filter(p -> p.getManufacturer().equals(manufacturer))
+                                .collect(Collectors.toList());
+            }
+
+        } else if (!name.isEmpty()) {
             return this.productRepository.findByProductNameContainingIgnoreCase(name);
         } else if (category != null) {
-            List<Product> products = new ArrayList<>();
-            addProducts(category, products);
-
-            return this.productRepository.findAllByCategoryEquals(category);
+            if(category.getParentCategory() == null)
+                return this.productRepository.findAllByCategoryEquals(category);
+             else{
+                return this.categoryService.listProductsByCategory(category.getId());
+             }
         } else if (manufacturer != null) {
             return this.productRepository.findAllByManufacturerEquals(manufacturer);
         } else {
@@ -99,13 +126,8 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    private void addProducts(Category category, List<Product> products) {
-        products.addAll(category.getProducts());
-        category.getSubcategories().forEach(s -> addProducts(s, products));
-    }
-
     private Product setProductProperties(String productName, Manufacturer manufacturer, LocalDate postDate,
-                                      ProductCharacteristic characteristic, Category category){
+                                         ProductCharacteristic characteristic, Category category) {
 
         List<Category> allCategories = this.categoryService.findAllParentCategories(category);
 
