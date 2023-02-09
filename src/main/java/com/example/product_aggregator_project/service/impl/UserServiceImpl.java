@@ -39,18 +39,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User register(String username, String password, String repeatPassword, String name, String surname, Integer roleId) {
-        if (username==null || username.isEmpty()  || password==null || password.isEmpty())
+    public User register(String username, String password, String repeatPassword, String name, String surname, String pictureUrl, String email, String phoneNumber, Integer roleId) {
+        if (username == null || username.isEmpty() || password == null || password.isEmpty())
             throw new InvalidUsernameOrPasswordException();
         if (!password.equals(repeatPassword))
             throw new PasswordsDoNotMatchException();
-        if(this.userRepository.findByEmail(username).isPresent())
+        if (this.userRepository.findByEmail(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
 
         Role userRole = this.roleRepository.findById(roleId)
                 .orElseThrow(RoleIdNotFoundException::new);
 
-        User user = new User(username,passwordEncoder.encode(password),name,surname, userRole);
+        User user = new User(username, passwordEncoder.encode(password), name, surname, pictureUrl, email, phoneNumber, userRole);
         return userRepository.save(user);
 
     }
