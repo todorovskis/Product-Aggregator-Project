@@ -1,12 +1,14 @@
-li a {
+.navbar-dark, .navbar-nav, .nav-link.active{
     color: #4b7fb7 !important;
+}
+
+li a:hover {
+    background-color: #30598f;
+    color: #fff;
 }
 
 body {
     background-color: #EFFAFD !important;
-    /*overflow-y: hidden;*/
-    /*color: black;*/
-    /*text-align:center;*/
 }
 
 .list {
@@ -34,8 +36,8 @@ body {
     padding: .4em .4em .4em 2em;
     *padding: .4em;
     margin: .5em 0;
-    background: #FC756F;
-    color: #444;
+    background: #30598f !important;
+    color: #FFFFFF;
     text-decoration: none;
     transition: all .2s ease-in-out;
 }
@@ -61,4 +63,41 @@ body {
     text-align: center;
     font-weight: bold;
     color:#FFF;
+}
+
+/*---*/
+
+ol {
+    list-style: none;
+    counter-reset: item;
+    margin: 0;
+    padding: 0;
+}
+
+ol li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    position: relative;
+}
+
+ol li:before {
+    /*content: counter(item) ".";*/
+    counter-increment: item;
+    color: blue;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+@media (max-width: 767px) {
+    ol li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    ol li:before {
+        margin-bottom: 10px;
+    }
 }
