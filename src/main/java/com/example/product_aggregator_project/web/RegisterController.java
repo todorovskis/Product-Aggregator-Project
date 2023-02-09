@@ -1,9 +1,7 @@
 package com.example.product_aggregator_project.web;
 
-import com.example.product_aggregator_project.model.Role;
 import com.example.product_aggregator_project.model.exceptions.InvalidArgumentsException;
 import com.example.product_aggregator_project.model.exceptions.PasswordsDoNotMatchException;
-import com.example.product_aggregator_project.service.AuthService;
 import com.example.product_aggregator_project.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/register")
 public class RegisterController {
 
-    private final AuthService authService;
     private final UserService userService;
 
-    public RegisterController(AuthService authService, UserService userService) {
-        this.authService = authService;
+    public RegisterController(UserService userService) {
         this.userService = userService;
     }
 
@@ -30,7 +26,7 @@ public class RegisterController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        model.addAttribute("bodyContent","register");
+        model.addAttribute("bodyContent", "register");
         return "master-template";
     }
 
@@ -40,9 +36,12 @@ public class RegisterController {
                            @RequestParam String repeatedPassword,
                            @RequestParam String name,
                            @RequestParam String surname,
+                           @RequestParam String email,
+                           @RequestParam String phoneNumber,
+                           @RequestParam String pictureUrl,
                            @RequestParam Integer roleId) {
         try{
-            this.userService.register(username, password, repeatedPassword, name, surname, roleId);
+            this.userService.register(username, password, repeatedPassword, name, surname, pictureUrl, email, phoneNumber, roleId);
             return "redirect:/login";
         } catch (InvalidArgumentsException | PasswordsDoNotMatchException exception) {
             return "redirect:/register?error=" + exception.getMessage();

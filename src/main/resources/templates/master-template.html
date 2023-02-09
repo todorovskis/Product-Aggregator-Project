@@ -27,10 +27,10 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/pictures/css/style.css">
-
+    <link rel="stylesheet" href="../static/pictures/css/style.css">
 </head>
 <body>
-<header th:replace="fragments/header" style="height: 10%"></header>
-<section th:include="${bodyContent}" style="width: 80%; min-height: 500px; margin: auto"></section>
+<header th:replace="fragments/header" style="height: 40px !important; padding: 5px"></header>
+<section th:include="${bodyContent}" style="width: 80%; height: 580px !important;; margin: auto"></section>
 <footer th:replace="/fragments/footer"></footer>
 </body>
