@@ -10,8 +10,7 @@ public interface UserService {
 
     List<User> listUsers();
 
-    User register(String username, String password, String repeatPassword, String name, String surname, Integer roleId);
-
+    User register(String username, String password, String repeatPassword, String name, String surname, String pictureUrl, String email, String phoneNumber, Integer roleId);
 
     UserDetails loadUserByUsername(String username);
 }

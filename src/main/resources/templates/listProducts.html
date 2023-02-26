@@ -20,24 +20,19 @@
 
 
     <div style="display: flex; flex-wrap: wrap;">
-        <ol class="list" th:each="product : ${products}">
+        <ul class="list" th:each="product : ${products}">
             <li>
                 <form th:action="@{'/products/{id}' (id=${product.getId()})}"
                       th:method="post" >
                     <button type="submit" style="background: none; border: none; cursor: pointer;">
-                        <a style="color: white; text-decoration: none;font-size: 16px;display: block; padding: 5px;" th:text="${product.getProductName()}"></a>
+                        <a th:text="${product.getProductName()}"></a>
                     </button>
                 </form>
             </li>
-        </ol>
+        </ul>
     </div>
-<!--    -->
-<!--    <form th:method="post" th:each="product: ${products}" th:action="@{'/products/{id}' (id=${product.getId()})}">-->
-<!--        <li>-->
-<!--            <button type="submit" th:text="${product.getProductName()}"></button>-->
-<!--        </li>-->
-<!--    </form>-->
-    <div>
+
+    <div sec:authorize="hasRole('${user.getRole().getRoleName()}')">
         <a href="/products/add" class="add-item" >
             Add new product
         </a>

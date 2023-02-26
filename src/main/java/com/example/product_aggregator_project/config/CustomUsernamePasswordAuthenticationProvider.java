@@ -27,7 +27,7 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
-        String password = passwordEncoder.encode(authentication.getCredentials().toString());
+        String password = authentication.getCredentials().toString();
 
         if ("".equals(username) || "".equals(password)) {
             throw new BadCredentialsException("Invalid Credentials");
@@ -47,3 +47,5 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
         return aClass.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
+
+

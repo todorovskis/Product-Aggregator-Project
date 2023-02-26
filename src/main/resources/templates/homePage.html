@@ -1,46 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-</head>
-<body>
-<div style="display: flex">
-    <div style="width: 50%; padding: 7%; margin-right:2%; text-align: left">
-        <h2 style="size: 30px; text-align: left; color: #4b7fb7; font-weight: bold;">Welcome to IT Product Aggregator!</h2>
-        <p style="color: #A0006D">The only IT Aggregator in the country</p>
-        <a style="display: block; width: auto; padding: 5px; font-size: 15px; border: 2px solid transparent; cursor: pointer; text-align: center; background-color: #4b7fb7; color: white; text-decoration: none"
-           href="/products">Explore products</a>
+<th:block>
+    <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+        <div style="width: 40%; margin-right: 2%; text-align: left;">
+            <h2 style="font-size: 30px; text-align: left; color: #4b7fb7; font-weight: bold;">Welcome to IT Product
+                Aggregator!</h2>
+            <p style="color: #A0006D;">The only IT Aggregator in the country</p>
+            <form th:action="@{'/'}" th:method="post">
+                <button class="exploreButton" type="submit">Explore products</button>
+            </form>
+        </div>
+        <div style="width: 40%; margin-left: 50px;">
+            <img th:src="@{/pictures/phones-homePage.png}" style="height: 400px;">
+        </div>
     </div>
-    <div style="width: 50%; padding: 7%; ">
-        <img th:src="@{/pictures/phones-homePage.png}" height="500" width="350"/></div>
-</div>
-<!--    <span style="width: 50%">-->
-<!--          -->
-<!--    </span>-->
-<!--    <div class="input-group">-->
-<!--        <div class="form-outline">-->
-<!--            <input type="search" id="form1" class="form-control" />-->
-<!--            <label class="form-label" for="form1">Search</label>-->
-<!--        </div>-->
-<!--        <button type="button" class="btn btn-primary">-->
-<!--            <i class="fas fa-search"></i>-->
-<!--        </button>-->
-<!--    </div>-->
-<!--    <span style="width: 50%">-->
-<!--       -->
-<!--    </span>-->
-
-</body>
-</html>
+</th:block>

@@ -77,4 +77,8 @@ public class User {
         this.surname = surname;
         this.role = role;
     }
+
+    public Role getRole() {
+        return role;
+    }
 }

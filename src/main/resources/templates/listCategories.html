@@ -3,52 +3,16 @@
         <input type="text" th:name="input">
         <button type="submit">Search</button>
     </form>
-<!--    <form th:each="category : ${categories}" th:action="@{'/categories/{id}' (id=${category.getId()})}" th:method="post">-->
-<!--        <li>-->
-<!--            <button type="submit" th:text="${category.getCategoryName()}"></button>-->
-<!--        </li>-->
-<!--    </form>-->
-
-<!--    <form th:each="category : ${categories}" th:action="@{'/categories/{id}' (id=${category.getId()})}" th:method="post">-->
-<!--        <div style="width:200px; height:250px; border:1px solid black; display:inline-block; margin-right:10px;">-->
-<!--            <img src="../pictures/logo-no-text.png" alt="Category Image" style="width:100%; height:200px;"><img-->
-<!--                     height="500" width="500"/>-->
-<!--            <p style="text-align:center; padding:5px;">-->
-
-<!--                <button type="submit" style="background: none; border: none; cursor: pointer;"><span th:text="${category.getCategoryName()}"></span></button>-->
-<!--                &lt;!&ndash;                <span th:text="${category.getCategoryName()}"></span>&ndash;&gt;-->
-<!--            </p>-->
-<!--&lt;!&ndash;            <input type="hidden" name="productId" th:value="${product.id}" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <button type="submit" th:text="${category.getCategoryName()}"></button>&ndash;&gt;-->
-<!--        </div>-->
-<!--    </form>-->
-
     <div>
-        <ol class="list">
+        <ul class="list">
             <li th:each="category : ${categories}">
                 <form th:action="@{'/categories/{id}' (id=${category.getId()})}"
                       th:method="post">
                     <button type="submit" style="background: none; border: none; cursor: pointer;">
-<!--                        <img th:src="@{'/pictures/categories/' + ${category.getId()} + '.jpg'}"-->
-<!--                             alt="Category Image" style="width:100%; height:200px;"/>-->
                         <a style="color: #000000; text-decoration: none;font-size: 16px;display: block; padding: 5px;" th:text="${category.getCategoryName()}"></a>
                     </button>
                 </form>
             </li>
-        </ol>
+        </ul>
     </div>
-
-<!--    <div style="display: flex; flex-wrap: wrap;">-->
-<!--        <form th:each="category : ${categories}" th:action="@{'/categories/{id}' (id=${category.getId()})}" th:method="post" style="width: 33.33%; padding: 10px;">-->
-<!--            <div style="width:100%; height:250px; border:5px solid transparent; padding: 10px; background-color: #CAC0B3">-->
-<!--                <p style="text-align:center; padding:5px; color: #224193">-->
-<!--                    <button type="submit" style="background: none; border: none; cursor: pointer;">-->
-<!--                        <img th:src="@{'/pictures/categories/' + ${category.getId()} + '.jpg'}"  alt="Category Image" style="width:100%; height:200px;"/>-->
-<!--                        <span th:text="${category.getCategoryName()}"></span>-->
-<!--                    </button>-->
-<!--                </p>-->
-<!--            </div>-->
-<!--        </form>-->
-<!--    </div>-->
-
 </th:block>

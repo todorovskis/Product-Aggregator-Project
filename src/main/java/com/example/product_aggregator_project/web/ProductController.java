@@ -4,10 +4,12 @@ import com.example.product_aggregator_project.model.Category;
 import com.example.product_aggregator_project.model.Product;
 import com.example.product_aggregator_project.service.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +22,19 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ManufacturerService manufacturerService;
     private final StoreService storeService;
+    private final AuthService authService;
 
-    public ProductController(ProductService productService,
-                             CategoryService categoryService,
-                             ManufacturerService manufacturerService,
-                             StoreService storeService) {
+    public ProductController(ProductService productService, CategoryService categoryService, ManufacturerService manufacturerService, StoreService storeService, AuthService authService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.manufacturerService = manufacturerService;
         this.storeService = storeService;
-     }
+        this.authService = authService;
+    }
 
     @GetMapping
-    public String getProducts(@RequestParam(required = false) String error, Model model) {
+    public String getProducts(@RequestParam(required = false) String error, Model model,
+                              HttpServletRequest request) {
 
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
@@ -43,6 +45,7 @@ public class ProductController {
         model.addAttribute("categories", this.categoryService.listCategories());
         model.addAttribute("stores", this.storeService.listStores());
         model.addAttribute("manufacturers", this.manufacturerService.listManufacturers());
+        model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("bodyContent", "listProducts");
         return "master-template";
     }
