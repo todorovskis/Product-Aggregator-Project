@@ -4,13 +4,11 @@
         <tr>
             <th>Manufacturer name</th>
             <th>Store name</th>
-<!--            <th>Num products per manufacturer</th>-->
             <th>Num products in store per manufacturer</th>
         </tr>
         <tr class="item" th:each="result: ${query1}">
             <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
             <td th:text="${result.getStoreName()}">[store.name]</td>
-<!--            <td th:text="${result.getNumProductsPerManufacturer()}">[num_products_per_manufacturer]</td>-->
             <td th:text="${result.getNumProductsInStorePerManufacturer()}">[num_products_in_store_per_manufacturer]</td>
         </tr>
     </table><br/>
