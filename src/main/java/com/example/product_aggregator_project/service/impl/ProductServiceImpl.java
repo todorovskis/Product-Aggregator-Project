@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,22 +105,22 @@ public class ProductServiceImpl implements ProductService {
         } else if (category != null && manufacturer != null) {
             if (category.getParentCategory() == null)
                 return this.productRepository
-                    .findAllByCategoryEqualsAndManufacturerEquals(category, manufacturer);
-            else{
+                        .findAllByCategoryEqualsAndManufacturerEquals(category, manufacturer);
+            else {
                 products.addAll(this.categoryService.listProductsByCategory(category.getId()));
                 return products.stream().
                         filter(p -> p.getManufacturer().equals(manufacturer))
-                                .collect(Collectors.toList());
+                        .collect(Collectors.toList());
             }
 
         } else if (!name.isEmpty()) {
             return this.productRepository.findByProductNameContainingIgnoreCase(name);
         } else if (category != null) {
-            if(category.getParentCategory() == null)
+            if (category.getParentCategory() == null)
                 return this.productRepository.findAllByCategoryEquals(category);
-             else{
+            else {
                 return this.categoryService.listProductsByCategory(category.getId());
-             }
+            }
         } else if (manufacturer != null) {
             return this.productRepository.findAllByManufacturerEquals(manufacturer);
         } else {

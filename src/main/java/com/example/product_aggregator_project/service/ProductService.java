@@ -16,6 +16,4 @@ public interface ProductService {
 
     List<Product> listProductsByNameAndCategoryAndManufacturer(String name, Integer categoryId, Integer manufacturerId);
 
-    //TODO: FILTERING OF PRODUCTS
-
 }

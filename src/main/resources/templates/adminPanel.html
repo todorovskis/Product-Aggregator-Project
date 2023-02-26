@@ -1,123 +1,158 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <h2>Stores that offer all products from a given manufacturer</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Manufacturer name</th>
-            <th>Store name</th>
-<!--            <th>Num products per manufacturer</th>-->
-            <th>Num products in store per manufacturer</th>
-        </tr>
-        <tr class="item" th:each="result: ${query1}">
-            <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
-            <td th:text="${result.getStoreName()}">[store.name]</td>
-<!--            <td th:text="${result.getNumProductsPerManufacturer()}">[num_products_per_manufacturer]</td>-->
-            <td th:text="${result.getNumProductsInStorePerManufacturer()}">[num_products_in_store_per_manufacturer]</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Manufacturer name</th>
+                <th>Store name</th>
+                <th>Num products in store per manufacturer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query1}">
+                <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
+                <td th:text="${result.getStoreName()}">[store.name]</td>
+                <td th:text="${result.getNumProductsInStorePerManufacturer()}">[num_products_in_store_per_manufacturer]</td>
+            </tr>
+        </tbody>
     </table><br/>
     <h2>Store that offers the same products as a given store</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Store name</th>
-            <th>Num products</th>
-        </tr>
-        <tr class="item" th:each="result: ${query2}">
-            <td th:text="${result.getStoreName()}">[store.name]</td>
-            <td th:text="${result.getNumProducts()}">[num_products]</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Store name</th>
+                <th>Num products</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query2}">
+                <td th:text="${result.getStoreName()}">[store.name]</td>
+                <td th:text="${result.getNumProducts()}">[num_products]</td>
+            </tr>
+        </tbody>
+
     </table><br/>
     <h2>Products with the highest average rating at category level</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Category name</th>
-            <th>Product name</th>
-            <th>Avg rating</th>
-        </tr>
-        <tr class="item" th:each="result: ${query3}">
-            <td th:text="${result.getCategoryName()}">[category.name]</td>
-            <td th:text="${result.getProductName()}">[product.name]</td>
-            <th th:text="${result.getAvgRating()}">[avg_rating]</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Category name</th>
+                <th>Product name</th>
+                <th>Avg rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query3}">
+                <td th:text="${result.getCategoryName()}">[category.name]</td>
+                <td th:text="${result.getProductName()}">[product.name]</td>
+                <th th:text="${result.getAvgRating()}">[avg_rating]</th>
+            </tr>
+        </tbody>
     </table><br/>
     <h2>Number of comments and average rating for each product from each manufacturer</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Manufacturer name</th>
-            <th>Product name</th>
-            <th>Number of comments</th>
-            <th>Avg rating</th>
-        </tr>
-        <tr class="item" th:each="result: ${query4}">
-            <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
-            <td th:text="${result.getProductName()}">[product.name]</td>
-            <td th:text="${result.getNumComments()}">[num_comments]</td>
-            <th th:text="${result.getAvgRating()}">[avg_rating]</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Manufacturer name</th>
+                <th>Product name</th>
+                <th>Number of comments</th>
+                <th>Avg rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query4}">
+                <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
+                <td th:text="${result.getProductName()}">[product.name]</td>
+                <td th:text="${result.getNumComments()}">[num_comments]</td>
+                <th th:text="${result.getAvgRating()}">[avg_rating]</th>
+            </tr>
+        </tbody>
     </table><br/>
     <h2>Favourite product for most users, by category</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Category name</th>
-            <th>Product name</th>
-            <th>Number of users</th>
-        </tr>
-        <tr class="item" th:each="result: ${query5}">
-            <td th:text="${result.getCategoryName()}">[category.name]</td>
-            <td th:text="${result.getProductName()}">[product.name]</td>
-            <td th:text="${result.getNumUsersFavourite()}">[num_users]</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Category name</th>
+                <th>Product name</th>
+                <th>Number of users</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query5}">
+                <td th:text="${result.getCategoryName()}">[category.name]</td>
+                <td th:text="${result.getProductName()}">[product.name]</td>
+                <td th:text="${result.getNumUsersFavourite()}">[num_users]</td>
+            </tr>
+        </tbody>
     </table><br/>
     <h2>Product that appears the most in the list of favourite products</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Product name</th>
-            <th>Number of users</th>
-        </tr>
-        <tr class="item" th:each="result: ${query6}">
-            <td th:text="${result.getProductName()}">[product.name]</td>
-            <td th:text="${result.getNumUsersFavourite()}">[num_users]</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Number of users</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query6}">
+                <td th:text="${result.getProductName()}">[product.name]</td>
+                <td th:text="${result.getNumUsersFavourite()}">[num_users]</td>
+            </tr>
+        </tbody>
     </table><br/>
     <h2>Price range and average price of products from each store</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Store name</th>
-            <th>Min price</th>
-            <th>Max price</th>
-            <th>Avg price</th>
-        </tr>
-        <tr class="item" th:each="result: ${query7}">
-            <td th:text="${result.getStoreName()}">[store.name]</td>
-            <td th:text="${result.getMinPrice()}">[min_price]</td>
-            <td th:text="${result.getMinPrice()}">[min_price]</td>
-            <td th:text="${result.getAvgPrice()}">[avg_price]</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Store name</th>
+                <th>Min price</th>
+                <th>Max price</th>
+                <th>Avg price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query7}">
+                <td th:text="${result.getStoreName()}">[store.name]</td>
+                <td th:text="${result.getMinPrice()}">[min_price]</td>
+                <td th:text="${result.getMinPrice()}">[min_price]</td>
+                <td th:text="${result.getAvgPrice()}">[avg_price]</td>
+            </tr>
+        </tbody>
     </table><br/>
     <h2>Price range and average price of products from each manufacturer</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Manufacturer name</th>
-            <th>Product name</th>
-            <th>Min price</th>
-            <th>Max price</th>
-            <th>Avg price</th>
-        </tr>
-        <tr class="item" th:each="result: ${query8}">
-            <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
-            <td th:text="${result.getProductName()}">[product.name]</td>
-            <td th:text="${result.getMinPrice()}">[min_price]</td>
-            <td th:text="${result.getMaxPrice()}">[max_price]</td>
-            <td th:text="${result.getAvgPrice()}">[avg_price]</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Manufacturer name</th>
+                <th>Product name</th>
+                <th>Min price</th>
+                <th>Max price</th>
+                <th>Avg price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query8}">
+                <td th:text="${result.getManufacturerName()}">[manufacturer.name]</td>
+                <td th:text="${result.getProductName()}">[product.name]</td>
+                <td th:text="${result.getMinPrice()}">[min_price]</td>
+                <td th:text="${result.getMaxPrice()}">[max_price]</td>
+                <td th:text="${result.getAvgPrice()}">[avg_price]</td>
+            </tr>
+        </tbody>
     </table><br/>
     <h2>Number of products by category</h2>
     <table class="table table-striped">
-        <tr>
-            <th>Category Name</th>
-            <th>Number of products</th>
-        </tr>
-        <tr class="item" th:each="result: ${query9}">
-            <td th:text="${result.getCategoryName()}">[category.name]</td>
-            <td th:text="${result.getNumProducts}">[num_products]</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Category Name</th>
+                <th>Number of products</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="item" th:each="result: ${query9}">
+                <td th:text="${result.getCategoryName()}">[category.name]</td>
+                <td th:text="${result.getNumProducts}">[num_products]</td>
+            </tr>
+        </tbody>
     </table>
 </th:block>

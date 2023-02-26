@@ -1,30 +1,33 @@
 package com.example.product_aggregator_project.model.admin_panel;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "all_manufacturer_products")
+@Subselect("select * from project.all_manufacturer_products")
+@Immutable
 public class StoresWithAllManufacturerProducts {
 
     @Id
-    private Integer manufacturerId;
+    private Long manufacturerId;
 
     private String manufacturerName;
 
     private String storeName;
 
-//    private Long numProductsPerManufacturer;
-
-    private Long numProductsInStorePerManufacturer;
+    private Integer numProductsInStorePerManufacturer;
 
     public StoresWithAllManufacturerProducts() {
     }
 
-    public Integer getManufacturerId() {
+    public Long getManufacturerId() {
         return manufacturerId;
     }
 
-    public void setManufacturerId(Integer manufacturerId) {
+    public void setManufacturerId(Long manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 
@@ -44,19 +47,11 @@ public class StoresWithAllManufacturerProducts {
         this.storeName = storeName;
     }
 
-//    public Long getNumProductsPerManufacturer() {
-//        return numProductsPerManufacturer;
-//    }
-//
-//    public void setNumProductsPerManufacturer(Long numProductsPerManufacturer) {
-//        this.numProductsPerManufacturer = numProductsPerManufacturer;
-//    }
-
-    public Long getNumProductsInStorePerManufacturer() {
+    public Integer getNumProductsInStorePerManufacturer() {
         return numProductsInStorePerManufacturer;
     }
 
-    public void setNumProductsInStorePerManufacturer(Long numProductsInStorePerManufacturer) {
+    public void setNumProductsInStorePerManufacturer(Integer numProductsInStorePerManufacturer) {
         this.numProductsInStorePerManufacturer = numProductsInStorePerManufacturer;
     }
 }

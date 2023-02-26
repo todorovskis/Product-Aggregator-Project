@@ -1,9 +1,14 @@
 package com.example.product_aggregator_project.model.admin_panel;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "most_favourite_product")
+@Subselect("select * from project.most_favourite_product")
+@Immutable
 public class MostFavouriteProduct {
 
     @Id

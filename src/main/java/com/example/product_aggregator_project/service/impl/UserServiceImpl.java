@@ -39,7 +39,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User register(String username, String password, String repeatPassword, String name, String surname, String pictureUrl, String email, String phoneNumber, Integer roleId) {
+    public User register(String username, String password, String repeatPassword, String name,
+                         String surname, String email, String phoneNumber, Integer roleId) {
         if (username == null || username.isEmpty() || password == null || password.isEmpty())
             throw new InvalidUsernameOrPasswordException();
         if (!password.equals(repeatPassword))
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Role userRole = this.roleRepository.findById(roleId)
                 .orElseThrow(RoleIdNotFoundException::new);
 
-        User user = new User(username, passwordEncoder.encode(password), name, surname, pictureUrl, email, phoneNumber, userRole);
+        User user = new User(username, password, name, surname, email, phoneNumber, userRole);
         return userRepository.save(user);
 
     }
@@ -60,10 +61,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = this.userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
+        String userRole = null;
+        if(user.getRole().getRoleName().equals("Administrator")){
+            userRole = "ADMIN";
+        }
+        else{
+            userRole = "USER";
+        }
         UserDetails userDetails = new org.springframework.security.core.userdetails
                 .User(user.getEmail(),
                 passwordEncoder.encode(user.getPassword()),
-                Collections.singleton(new SimpleGrantedAuthority(user.getRole().getRoleName())));
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_" + userRole)));
 
         return userDetails;
     }

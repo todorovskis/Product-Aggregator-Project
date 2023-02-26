@@ -32,7 +32,8 @@
         </ul>
     </div>
 
-    <div sec:authorize="hasRole('${user.getRole().getRoleName()}')">
+<!--    <div sec:authorize="hasRole('${user.getRole().getRoleName()}')">-->
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
         <a href="/products/add" class="add-item" >
             Add new product
         </a>

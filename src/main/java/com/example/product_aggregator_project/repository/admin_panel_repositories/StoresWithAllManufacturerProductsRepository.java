@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface StoresWithAllManufacturerProductsRepository extends JpaRepository<StoresWithAllManufacturerProducts, Integer> {
 
-    @Query(value = "select * from project.all_manufacturer_products", nativeQuery = true)
-    List<StoresWithAllManufacturerProducts> findStoresWithAllManufacturerProducts();
+//    @Query(value = "select * from project.all_manufacturer_products", nativeQuery = true)
+//    List<StoresWithAllManufacturerProducts> findStoresWithAllManufacturerProducts();
 }
