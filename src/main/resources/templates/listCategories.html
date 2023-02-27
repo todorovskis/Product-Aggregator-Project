@@ -1,14 +1,17 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
     <form th:action="@{'/categories'}" th:method="post">
-        <input type="text" th:name="input">
+        <span class="inputField">
+            <input type="text" th:name="input">
+        </span>
         <button type="submit">Search</button>
     </form>
-    <div>
+
+    <div style="margin-top:20px;">
         <ul class="list">
             <li th:each="category : ${categories}">
                 <form th:action="@{'/categories/{id}' (id=${category.getId()})}"
                       th:method="post">
-                    <button type="submit" style="background: none; border: none; cursor: pointer;">
+                    <button class="" type="submit" style="background: none; border: none; cursor: pointer;">
                         <a style="color: #000000; text-decoration: none;font-size: 16px;display: block; padding: 5px;" th:text="${category.getCategoryName()}"></a>
                     </button>
                 </form>

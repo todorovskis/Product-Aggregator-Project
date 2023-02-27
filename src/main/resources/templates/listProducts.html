@@ -2,9 +2,11 @@
     <body>
     <form th:method="POST" th:action="@{'/products/show'}">
         <label for="productName">Product name</label>
-        <input id="productName" type="text" name="productName"/>
+        <span class="inputField" style="margin-right: 5px;">
+            <input id="productName" type="text" name="productName"/>
+        </span>
         <label for="categoryId">Category</label>
-        <select id="categoryId" name="categoryId" class="btn dropdown-toggle" style="background: #4b7fb7">
+        <select id="categoryId" name="categoryId" class="btn dropdown-toggle" style="background: #4b7fb7; margin-right: 5px;o">
             <option value="">All categories</option>
             <option th:each="category: ${categories}" th:value="${category.getId()}"
                     th:text="${category.getCategoryName()}"></option>
@@ -19,11 +21,11 @@
     </form>
 
 
-    <div style="display: flex; flex-wrap: wrap;">
-        <ul class="list" th:each="product : ${products}">
-            <li>
+    <div style="display: flex; flex-wrap: wrap; margin-top:20px;">
+        <ul class="list">
+            <li th:each="product : ${products}">
                 <form th:action="@{'/products/{id}' (id=${product.getId()})}"
-                      th:method="post" >
+                      th:method="post">
                     <button type="submit" style="background: none; border: none; cursor: pointer;">
                         <a th:text="${product.getProductName()}"></a>
                     </button>
@@ -33,7 +35,7 @@
     </div>
 
     <div sec:authorize="hasRole('${user.getRole().getRoleName()}')">
-        <a href="/products/add" class="add-item" >
+        <a href="/products/add" class="add-item">
             Add new product
         </a>
     </div>

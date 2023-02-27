@@ -1,5 +1,5 @@
 <header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <section class="" style="background-color: transparent">
+    <section class="" style="background-color: transparent; width: 70%">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="background-color: transparent !important;">
                 <div class="container">
@@ -45,12 +45,17 @@
                     </div>
                 </div>
             </nav>
-            <th:block th:if="${#request.getRemoteUser() != null}"
-                      th:text="'Logged as: ' + ${#request.getRemoteUser()}"></th:block>
-            <div class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="btn btn-light btn-sm ml-3" href="/logout">
-                    <i>Logout</i>
-                </a>
+            <div style="color: #30598f; font-size: 14px; align-items: center;">
+                <div class="nav-item" sec:authorize="isAuthenticated()" style="float: right;">
+                    <a style="text-decoration: none;
+                        color: #30598f !important;" href="/logout">
+                        <i>Logout</i>
+                    </a>
+                </div>
+                <div style="float: left;">
+                    <th:block th:if="${#request.getRemoteUser() != null}"
+                              th:text="'Logged as: ' + ${#request.getRemoteUser()}"></th:block>
+                </div>
             </div>
         </div>
     </section>
