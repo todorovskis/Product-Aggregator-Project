@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
-                .anyRequest().hasRole("Administrator")
+                .anyRequest().hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()
                 .failureUrl("/login?error=BadCredentials")

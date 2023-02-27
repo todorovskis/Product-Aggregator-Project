@@ -1,9 +1,14 @@
 package com.example.product_aggregator_project.model.admin_panel;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "same_product_offer")
+@Subselect("select * from project.same_product_offer")
+@Immutable
 public class StoresWithSameProductsOffer {
 
     @Id

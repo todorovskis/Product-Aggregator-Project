@@ -1,10 +1,15 @@
 package com.example.product_aggregator_project.model.admin_panel;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
 @Entity(name = "product_details_per_store")
+@Subselect("select * from  project.product_details_per_store")
+@Immutable
 public class ProductDetailsPerStore {
 
     @Id

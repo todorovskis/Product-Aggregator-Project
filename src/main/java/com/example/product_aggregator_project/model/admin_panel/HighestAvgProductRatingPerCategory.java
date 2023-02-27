@@ -1,10 +1,15 @@
 package com.example.product_aggregator_project.model.admin_panel;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
 @Entity(name = "highest_avg_product_rating_per_category")
+@Subselect("select * from project.highest_avg_product_rating_per_category")
+@Immutable
 public class HighestAvgProductRatingPerCategory {
 
     @Id

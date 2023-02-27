@@ -61,10 +61,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = this.userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
+        String userRole = null;
+        if(user.getRole().getRoleName().equals("Administrator")){
+            userRole = "ADMIN";
+        }
+        else{
+            userRole = "USER";
+        }
         UserDetails userDetails = new org.springframework.security.core.userdetails
                 .User(user.getEmail(),
                 passwordEncoder.encode(user.getPassword()),
-                Collections.singleton(new SimpleGrantedAuthority(user.getRole().getRoleName())));
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_" + userRole)));
 
         return userDetails;
     }

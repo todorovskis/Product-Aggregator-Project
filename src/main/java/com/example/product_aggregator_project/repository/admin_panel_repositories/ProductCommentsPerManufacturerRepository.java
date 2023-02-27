@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ProductCommentsPerManufacturerRepository extends JpaRepository<ProductCommentsPerManufacturer, Integer> {
 
-    @Query(value = "select * from project.product_comments_per_manufacturer", nativeQuery = true)
-    List<ProductCommentsPerManufacturer> findProductCommentsPerManufacturer();
+//    @Query(value = "select * from project.product_comments_per_manufacturer", nativeQuery = true)
+//    List<ProductCommentsPerManufacturer> findProductCommentsPerManufacturer();
 }

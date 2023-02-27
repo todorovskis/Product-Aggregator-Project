@@ -1,17 +1,13 @@
 package com.example.product_aggregator_project.model.admin_panel;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
 import javax.persistence.*;
 
 @Entity(name = "num_products_by_category")
-//@SqlResultSetMapping(
-//        name = "findNumProductsByCategoryMapping",
-//        classes = @ConstructorResult(
-//                targetClass = ProductNumberPerCategory.class,
-//                columns= {@ColumnResult(name = "category_id", type = Integer.class),
-//                            @ColumnResult(name = "category_name", type = String.class),
-//                            @ColumnResult(name = "num_products", type = Long.class)}
-//        )
-//)
+@Subselect("select * from project.num_products_by_category")
+@Immutable
 public class ProductNumberPerCategory {
 
     @Id

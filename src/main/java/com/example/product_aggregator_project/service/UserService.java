@@ -1,6 +1,5 @@
 package com.example.product_aggregator_project.service;
 
-import com.example.product_aggregator_project.model.Role;
 import com.example.product_aggregator_project.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
