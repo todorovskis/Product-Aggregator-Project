@@ -1,21 +1,25 @@
-package com.example.product_aggregator_project.model.admin_panel;
+package com.example.product_aggregator_project.model.admin_panel.dto;
 
+import com.example.product_aggregator_project.model.admin_panel.composite_keys.StoresWithAllManufacturerProductsId;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Subselect;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity(name = "all_manufacturer_products")
 @Subselect("select * from project.all_manufacturer_products")
 @Immutable
+@IdClass(StoresWithAllManufacturerProductsId.class)
 public class StoresWithAllManufacturerProducts {
 
     @Id
-    private Long manufacturerId;
+    private Integer manufacturerId;
 
     private String manufacturerName;
 
+    @Id
     private String storeName;
 
     private Integer numProductsInStorePerManufacturer;
@@ -23,11 +27,11 @@ public class StoresWithAllManufacturerProducts {
     public StoresWithAllManufacturerProducts() {
     }
 
-    public Long getManufacturerId() {
+    public Integer getManufacturerId() {
         return manufacturerId;
     }
 
-    public void setManufacturerId(Long manufacturerId) {
+    public void setManufacturerId(Integer manufacturerId) {
         this.manufacturerId = manufacturerId;
     }
 

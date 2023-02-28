@@ -14,13 +14,11 @@ import com.example.product_aggregator_project.repository.ProductCharacteristicRe
 import com.example.product_aggregator_project.repository.ProductRepository;
 import com.example.product_aggregator_project.service.CategoryService;
 import com.example.product_aggregator_project.service.ProductService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> listProducts() {
-        return this.productRepository.findAll();
+        return this.productRepository.findAll(Sort.by(Sort.Direction.DESC, "postDate"));
     }
 
     @Override
@@ -65,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
         this.characteristicRepository.save(characteristic);
 
         Product product = setProductProperties(productName, manufacturer, postDate, characteristic, category);
+        product.getCategories().add(category);
         product.getCategories().forEach(c -> c.getProducts().add(product));
 
         return this.productRepository.save(product);
@@ -124,7 +123,7 @@ public class ProductServiceImpl implements ProductService {
         } else if (manufacturer != null) {
             return this.productRepository.findAllByManufacturerEquals(manufacturer);
         } else {
-            return this.productRepository.findAll();
+            return this.productRepository.findAll(Sort.by(Sort.Direction.DESC, "postDate"));
         }
     }
 

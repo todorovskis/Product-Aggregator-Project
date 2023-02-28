@@ -1,4 +1,4 @@
-package com.example.product_aggregator_project.model.admin_panel;
+package com.example.product_aggregator_project.model.admin_panel.dto;
 
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Subselect;
