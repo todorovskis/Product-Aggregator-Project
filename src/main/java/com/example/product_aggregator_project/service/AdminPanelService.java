@@ -1,6 +1,6 @@
 package com.example.product_aggregator_project.service;
 
-import com.example.product_aggregator_project.model.admin_panel.*;
+import com.example.product_aggregator_project.model.admin_panel.dto.*;
 
 import java.util.List;
 

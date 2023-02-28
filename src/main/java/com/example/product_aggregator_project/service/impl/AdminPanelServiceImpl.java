@@ -1,7 +1,6 @@
 package com.example.product_aggregator_project.service.impl;
 
-import com.example.product_aggregator_project.model.admin_panel.*;
-
+import com.example.product_aggregator_project.model.admin_panel.dto.*;
 import com.example.product_aggregator_project.repository.admin_panel_repositories.*;
 import com.example.product_aggregator_project.service.AdminPanelService;
 import org.springframework.stereotype.Service;

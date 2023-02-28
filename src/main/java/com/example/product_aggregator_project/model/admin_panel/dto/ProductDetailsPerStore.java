@@ -1,20 +1,24 @@
-package com.example.product_aggregator_project.model.admin_panel;
+package com.example.product_aggregator_project.model.admin_panel.dto;
 
+import com.example.product_aggregator_project.model.admin_panel.composite_keys.ProductDetailsPerStoreId;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Subselect;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import java.math.BigDecimal;
 
 @Entity(name = "product_details_per_store")
 @Subselect("select * from  project.product_details_per_store")
 @Immutable
+@IdClass(ProductDetailsPerStoreId.class)
 public class ProductDetailsPerStore {
 
     @Id
     private Integer storeId;
 
+    @Id
     private String storeName;
 
     private Integer minPrice;

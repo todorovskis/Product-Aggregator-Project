@@ -1,4 +1,4 @@
-package com.example.product_aggregator_project.model.admin_panel;
+package com.example.product_aggregator_project.model.admin_panel.dto;
 
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Subselect;
@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 @Immutable
 public class ProductCommentsPerManufacturer {
 
-    @Id
     private Integer manufacturerId;
 
     private String manufacturerName;
 
+    @Id
     private String productName;
 
     private Long numComments;
