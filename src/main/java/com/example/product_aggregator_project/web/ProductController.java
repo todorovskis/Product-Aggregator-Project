@@ -100,4 +100,8 @@ public class ProductController {
 
         return "redirect:/products";
     }
+
+//    @PostMapping
+//    public String edit(@RequestParam String model,
+//                       @RequestParam )
 }
