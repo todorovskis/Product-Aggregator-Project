@@ -49,13 +49,22 @@
                 <div class="nav-item" sec:authorize="isAuthenticated()" style="float: right;">
                     <a style="text-decoration: none;
                         color: #30598f !important;" href="/logout">
-                        <i>Logout</i>
+                        <p>Logout</p>
                     </a>
                 </div>
                 <div style="float: left;">
-                    <th:block th:if="${#request.getRemoteUser() != null}"
-                              th:text="'Logged as: ' + ${#request.getRemoteUser()}"></th:block>
+                    <th:block th:if="${#request.getRemoteUser() != null}">
+                        <a th:href="@{'/users/profiles/{email}' (email=${#request.getRemoteUser()})}"
+                            th:text="${#request.getRemoteUser()}"></a>
+                    </th:block>
                 </div>
+
+<!--                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}"
+                                       class="btn btn-sm btn-info edit-product">
+                                        <i class="fa fa-trash">Edit</i>
+                                    </a>
+                                </th:block>-->
             </div>
         </div>
     </section>

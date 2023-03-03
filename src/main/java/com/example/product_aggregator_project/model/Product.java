@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -26,7 +27,7 @@ public class Product {
     private LocalDate postDate;
 
     @ManyToOne
-    @JoinColumn( name = "manufacturer_id", nullable = false)
+    @JoinColumn(name = "manufacturer_id", nullable = false)
     private Manufacturer manufacturer;
 
     @ManyToOne
@@ -76,15 +77,19 @@ public class Product {
         this.characteristic = characteristic;
     }
 
-    public Product(String productName, Category category, Manufacturer manufacturer, LocalDate postDate, ProductCharacteristic characteristic){
+    public Product(String productName, Category category, Manufacturer manufacturer, LocalDate postDate, ProductCharacteristic characteristic) {
         this.productName = productName;
 
-        if(this.categories == null){
+        if (this.categories == null) {
             this.categories = new ArrayList<>();
         }
         this.categories.add(category);
         this.manufacturer = manufacturer;
         this.postDate = postDate;
         this.characteristic = characteristic;
+    }
+
+    public List<Store> getProductInstancesUniqueStores() {
+        return productInstances.stream().distinct().map(ProductInstance::getStore).collect(Collectors.toList());
     }
 }

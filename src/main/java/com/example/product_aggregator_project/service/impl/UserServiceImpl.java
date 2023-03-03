@@ -2,10 +2,7 @@ package com.example.product_aggregator_project.service.impl;
 
 import com.example.product_aggregator_project.model.Role;
 import com.example.product_aggregator_project.model.User;
-import com.example.product_aggregator_project.model.exceptions.InvalidUsernameOrPasswordException;
-import com.example.product_aggregator_project.model.exceptions.PasswordsDoNotMatchException;
-import com.example.product_aggregator_project.model.exceptions.RoleIdNotFoundException;
-import com.example.product_aggregator_project.model.exceptions.UsernameAlreadyExistsException;
+import com.example.product_aggregator_project.model.exceptions.*;
 import com.example.product_aggregator_project.repository.RoleRepository;
 import com.example.product_aggregator_project.repository.UserRepository;
 import com.example.product_aggregator_project.service.UserService;
@@ -57,6 +54,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User edit(Integer id, String username, String email) {
+        User user = this.userRepository.findById(id)
+                        .orElseThrow(() -> new UsernameNotFoundException(username));
+        user.setUsername(username);
+        user.setEmail(email);
+        this.userRepository.save(user);
+        return user;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = this.userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
@@ -74,5 +81,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_" + userRole)));
 
         return userDetails;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
     }
 }
