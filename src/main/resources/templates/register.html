@@ -36,19 +36,10 @@
         </p>
         <p>
             <label for="phoneNumber" class="sr-only">Phone Number</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone Number"
+            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone Number"
+                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                    required=""
                    autofocus="">
-        </p>
-        <p>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" name="roleId" type="radio" id="ROLE_ADMIN" value="2">
-            <label class="form-check-label" for="ROLE_ADMIN">Administrator</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" name="roleId" type="radio" id="ROLE_USER" value="1">
-            <label class="form-check-label" for="ROLE_USER">Basic User</label>
-        </div>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     </form>

@@ -1,19 +1,36 @@
 <th:block xmlns:th="http://www.thymeleaf.org">
-    <div style="display: flex; align-items: center">
-        <img th:src="@{'/pictures/products/' + ${product.getId()} + '.jpg'}"  alt="Product Image"
-             style="width:400px; height:400px;"/>
-        <ul style="font-size: 18px; list-style: none; ">
-            <li th:text="'Model: ' + ${product?.getProductName()}"></li>
-            <li th:text="'Manufacturer: ' + ${product?.getManufacturer()?.getManufacturerName()}"></li>
-            <li th:text="'Category: ' + ${category?.getCategoryName()}"></li>
-            <li th:each="instance: ${product?.getProductInstances()}">
-                <div th:text="${instance?.getStore()?.getStoreName()} + ': ' +
+        <div style="display: flex; align-items: center">
+            <img th:src="@{'/pictures/products/' + ${product.getId()} + '.jpg'}"  alt="Product Image"
+                 style="width:400px; height:400px;"/>
+            <ul style="font-size: 18px; list-style: none; ">
+                <li th:text="'Model: ' + ${product?.getProductName()}"></li>
+                <li th:text="'Manufacturer: ' + ${product?.getManufacturer()?.getManufacturerName()}"></li>
+                <li th:text="'Category: ' + ${category?.getCategoryName()}"></li>
+                <li th:each="instance: ${product?.getProductInstances()}">
+                    <div th:text="${instance?.getStore()?.getStoreName()} + ': ' +
                     ${instance?.getPrice()} + ' ден.'">
-                </div>
-            </li>
-            <br>
-            <li th:text="'Description: ' + ${product?.getCharacteristic().getCharacteristicDescription()}"></li>
-        </ul>
-    </div>
-    <a style="font-size: 18px; margin-top: 10px;" id="back" href="/products" type="button" class="btn btn-primary">Back to products</a>
+                    </div>
+                </li>
+                <br>
+                <li th:text="'Description: ' + ${product?.getCharacteristic().getCharacteristicDescription()}"></li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{'/userfavourites/{id}' (id=${product?.getId()})}" th:method="post">
+                        <button
+                                type="submit" style="font-size: 18px; margin-top: 10px; color: white" id="add"
+                                class="btn btn-primary">Add to favourites
+                        </button>
+                    </form>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <form>
+                        <button
+                                type="submit" style=" display: none; font-size: 18px; margin-top: 10px; color: white" id="remove"
+                                class="btn btn-primary">Remove from favourites
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <button type="submit" style="font-size: 18px; margin-top: 10px;" id="back"
+           class="btn btn-primary">Back to products</button>
 </th:block>

@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User register(String username, String password, String repeatPassword, String name,
-                         String surname, String email, String phoneNumber, Integer roleId) {
+                         String surname, String email, String phoneNumber) {
         if (username == null || username.isEmpty() || password == null || password.isEmpty())
             throw new InvalidUsernameOrPasswordException();
         if (!password.equals(repeatPassword))
@@ -45,10 +45,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (this.userRepository.findByEmail(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
 
-        Role userRole = this.roleRepository.findById(roleId)
-                .orElseThrow(RoleIdNotFoundException::new);
-
-        User user = new User(username, password, name, surname, email, phoneNumber, userRole);
+        User user = new User(username, password, name, surname, email, phoneNumber);
+        user.setRole(new Role(1, "Basic user", "User"));
         return userRepository.save(user);
 
     }
@@ -87,5 +85,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User findByEmail(String email) {
         return this.userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(email));
+    }
+
+    @Override
+    public User findById(Integer userId) {
+        return this.userRepository.findById(userId)
+                .orElseThrow(UserIdNotFoundException::new);
     }
 }

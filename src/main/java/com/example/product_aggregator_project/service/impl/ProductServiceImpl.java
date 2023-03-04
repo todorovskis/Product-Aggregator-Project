@@ -1,17 +1,12 @@
 package com.example.product_aggregator_project.service.impl;
 
-import com.example.product_aggregator_project.model.Category;
-import com.example.product_aggregator_project.model.Manufacturer;
-import com.example.product_aggregator_project.model.Product;
-import com.example.product_aggregator_project.model.ProductCharacteristic;
+import com.example.product_aggregator_project.model.*;
 import com.example.product_aggregator_project.model.exceptions.CategoryIdNotFoundException;
 import com.example.product_aggregator_project.model.exceptions.ManufacturerIdNotFoundException;
 import com.example.product_aggregator_project.model.exceptions.ProductIdNotFoundException;
-import com.example.product_aggregator_project.repository.CategoryRepository;
+import com.example.product_aggregator_project.model.exceptions.UserIdNotFoundException;
+import com.example.product_aggregator_project.repository.*;
 
-import com.example.product_aggregator_project.repository.ManufacturerRepository;
-import com.example.product_aggregator_project.repository.ProductCharacteristicRepository;
-import com.example.product_aggregator_project.repository.ProductRepository;
 import com.example.product_aggregator_project.service.CategoryService;
 import com.example.product_aggregator_project.service.ProductService;
 import org.springframework.data.domain.Sort;
@@ -29,17 +24,24 @@ public class ProductServiceImpl implements ProductService {
     private final ManufacturerRepository manufacturerRepository;
     private final ProductCharacteristicRepository characteristicRepository;
     private final CategoryService categoryService;
+    private final UserRepository userRepository;
+    private final UserFavouriteRepository userFavouriteRepository;
 
 
     public ProductServiceImpl(ProductRepository productRepository,
                               CategoryRepository categoryRepository,
                               ManufacturerRepository manufacturerRepository,
-                              ProductCharacteristicRepository characteristicRepository, CategoryService categoryService) {
+                              ProductCharacteristicRepository characteristicRepository,
+                              CategoryService categoryService,
+                              UserRepository userRepository,
+                              UserFavouriteRepository userFavouriteRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.manufacturerRepository = manufacturerRepository;
         this.characteristicRepository = characteristicRepository;
         this.categoryService = categoryService;
+        this.userRepository = userRepository;
+        this.userFavouriteRepository = userFavouriteRepository;
     }
 
     @Override
@@ -78,6 +80,7 @@ public class ProductServiceImpl implements ProductService {
 
         return filterProducts(name, category, manufacturer);
     }
+
 
     private List<Product> filterProducts(String name, Category category, Manufacturer manufacturer) {
         List<Product> products = new ArrayList<>();

@@ -2,16 +2,19 @@ package com.example.product_aggregator_project.web;
 
 import com.example.product_aggregator_project.model.Category;
 import com.example.product_aggregator_project.model.Product;
+import com.example.product_aggregator_project.model.User;
+import com.example.product_aggregator_project.model.exceptions.ProductIdNotFoundException;
+import com.example.product_aggregator_project.model.exceptions.UserIdNotFoundException;
 import com.example.product_aggregator_project.service.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,14 +25,21 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ManufacturerService manufacturerService;
     private final StoreService storeService;
-    private final AuthService authService;
+    private final UserService userService;
+    private final UserFavouriteService userFavouriteService;
 
-    public ProductController(ProductService productService, CategoryService categoryService, ManufacturerService manufacturerService, StoreService storeService, AuthService authService) {
+    public ProductController(ProductService productService,
+                             CategoryService categoryService,
+                             ManufacturerService manufacturerService,
+                             StoreService storeService,
+                             UserService userService,
+                             UserFavouriteService userFavouriteService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.manufacturerService = manufacturerService;
         this.storeService = storeService;
-        this.authService = authService;
+        this.userService = userService;
+        this.userFavouriteService = userFavouriteService;
     }
 
     @GetMapping
@@ -67,7 +77,8 @@ public class ProductController {
     }
 
     @PostMapping("/{id}")
-    public String getProductInfo(@PathVariable Integer id, Model model){
+    public String getProductInfo(@PathVariable Integer id,
+                                 Model model) {
         Product product = this.productService.findById(id);
         Category category = this.categoryService.findById(product.getCategory().getId());
 
@@ -78,7 +89,7 @@ public class ProductController {
     }
 
     @GetMapping("/add")
-    public String showAddPage(Model model){
+    public String showAddPage(Model model) {
         model.addAttribute("products", this.productService.listProducts());
         model.addAttribute("manufacturers", this.manufacturerService.listManufacturers());
         model.addAttribute("categories", this.categoryService.findCategoriesWithParentCategory());
@@ -93,15 +104,11 @@ public class ProductController {
                       @RequestParam Integer categoryId,
                       @RequestParam Integer manufacturerId,
                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate postDate,
-                      @RequestParam String characteristicDesc){
+                      @RequestParam String characteristicDesc) {
 
         this.productService.addProduct(productName, categoryId, manufacturerId,
                 postDate, characteristicDesc);
 
         return "redirect:/products";
     }
-
-//    @PostMapping
-//    public String edit(@RequestParam String model,
-//                       @RequestParam )
 }

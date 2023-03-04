@@ -28,8 +28,7 @@ public class UserFavourite {
     public UserFavourite() {
     }
 
-    public UserFavourite(Integer id, User user, Product product) {
-        this.id = id;
+    public UserFavourite(User user, Product product) {
         this.user = user;
         this.product = product;
     }

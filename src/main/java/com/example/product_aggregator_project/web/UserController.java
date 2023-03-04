@@ -6,17 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
+    private final UserFavouriteService userFavouriteService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserFavouriteService userFavouriteService) {
         this.userService = userService;
+        this.userFavouriteService = userFavouriteService;
     }
 
     @GetMapping
@@ -25,7 +24,8 @@ public class UserController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        this.userService.listUsers().forEach(i -> i.getUserComments().forEach(j -> System.out.println(j.getUser() + " " + j.getUserComment())));
+        this.userService.listUsers().forEach(i -> i.getUserComments()
+                .forEach(j -> System.out.println(j.getUser() + " " + j.getUserComment())));
         model.addAttribute("bodyContent", "listUsers");
         return "master-template";
     }
@@ -40,6 +40,8 @@ public class UserController {
         User user = this.userService.findByEmail(email);
         model.addAttribute("user", user);
         model.addAttribute("bodyContent", "editUser");
+
+        model.addAttribute("favourites", this.userFavouriteService.listByUserId(user.getId()));
         return "master-template";
     }
 
@@ -48,6 +50,7 @@ public class UserController {
                                  @RequestParam String username,
                                  @RequestParam String email) {
         this.userService.edit(id, username, email);
+
         return "redirect:/home";
     }
 }

@@ -7,4 +7,8 @@ import java.util.List;
 public interface UserFavouriteService {
 
     List<UserFavourite> listUserFavourites();
+
+    List<UserFavourite> listByUserId(Integer userId);
+
+    UserFavourite addProductToUserFavourites(Integer userId, Integer productId);
 }

@@ -58,15 +58,13 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String name, String surname, String email, String phoneNumber, Role role) {
+    public User(String username, String password, String name, String surname, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.pictureUrl = pictureUrl;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.role = role;
     }
 
 

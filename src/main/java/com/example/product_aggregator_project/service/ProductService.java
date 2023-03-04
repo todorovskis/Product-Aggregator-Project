@@ -1,6 +1,7 @@
 package com.example.product_aggregator_project.service;
 
 import com.example.product_aggregator_project.model.Product;
+import com.example.product_aggregator_project.model.UserFavourite;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,5 +16,4 @@ public interface ProductService {
                        LocalDate postDate, String characteristic);
 
     List<Product> listProductsByNameAndCategoryAndManufacturer(String name, Integer categoryId, Integer manufacturerId);
-
 }
