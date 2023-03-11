@@ -15,7 +15,7 @@
                 <li th:text="'Description: ' + ${product?.getCharacteristic().getCharacteristicDescription()}"></li>
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{'/userfavourites/{id}' (id=${product?.getId()})}" th:method="post">
-                        <button
+                        <button onclick="showRemoveButton()"
                                 type="submit" style="font-size: 18px; margin-top: 10px; color: white" id="add"
                                 class="btn btn-primary">Add to favourites
                         </button>
@@ -23,7 +23,7 @@
                 </li>
                 <li sec:authorize="isAuthenticated()">
                     <form>
-                        <button
+                        <button onclick="showAddButton()"
                                 type="submit" style=" display: none; font-size: 18px; margin-top: 10px; color: white" id="remove"
                                 class="btn btn-primary">Remove from favourites
                         </button>

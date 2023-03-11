@@ -19,19 +19,67 @@
                    th:value="(${user} != null ? ${user.getEmail()} : '')"
                    placeholder="Email">
         </div>
-        <div style="margin-bottom: 10px">
-            <p>Favourite products</p>
-            <ul class="list">
-                <li th:each="favourite: ${favourites}">
-                    <form th:action="@{/products/{id} (id=${favourite.getProduct()?.getId()})}" method="post">
-                        <button type="submit" style="background: none; border: none; cursor: pointer;">
-                            <a th:text="${favourite.getProduct().getProductName()}"></a>
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
         <button id="submit" type="submit" class="btn btn-primary">Submit</button>
         <a type="button" class="btn btn-primary" href="/">Back</a>
     </form>
+
+    <div class="container mt-5 mb-5" style="width: 100%">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col">
+                <p class="mb-5"><span class="h2">Favourite products </span>
+                    <span class="h4" th:text="'(' + ${#lists.size(favourites)} + ')'">([num_favourite_products])</span>
+                </p>
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-md-2 text-center"></div>
+                    <div class="col-md-2 text-center">Name</div>
+                    <div class="col-md-2 text-center">Manufacturer</div>
+                    <div class="col-md-2 text-center">Category</div>
+                    <div class="col-md-3 text-center"></div>
+                </div>
+                <div th:each="favourite: ${favourites}">
+                    <div class="card rounded-3 mb-3 mt-3">
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="col-md-2">
+                                    <img th:src="@{'/pictures/products/' + ${favourite.getProduct().getId()} + '.jpg'}"
+                                         alt="Product Image" class="img-fluid rounded-3">
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <p class="lead fw-normal mb-2" style="font-size: 15px"
+                                       th:text="${favourite.getProduct().getProductName()}">
+                                    </p>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <p class="lead fw-normal mb-2" style="font-size: 15px"
+                                       th:text="${favourite.getProduct()
+                                    .getManufacturer().getManufacturerName()}">
+                                    </p>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <p class="lead fw-normal mb-2" style="font-size:
+                                    15px" th:text="${favourite.getProduct()
+                                    .getCategory().getCategoryName()}">
+                                    </p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <button class="btn btn-danger" style="color: white">
+                                        Remove from favourites</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--        <div style="margin-bottom: 10px">-->
+                <!--            <p>Favourite products</p>-->
+                <!--            <ul class="list">-->
+                <!--                <li th:each="favourite: ${favourites}">-->
+                <!--                    <form th:action="@{/products/{id} (id=${favourite.getProduct()?.getId()})}" method="post">-->
+                <!--                        <button type="submit" style="background: none; border: none; cursor: pointer;">-->
+                <!--                            <a th:text="${favourite.getProduct().getProductName()}"></a>-->
+                <!--                        </button>-->
+                <!--                    </form>-->
+                <!--                </li>-->
+                <!--            </ul>-->
+                <!--        </div>-->
 </th:block>
