@@ -1,6 +1,5 @@
 package com.example.product_aggregator_project.web;
 
-import com.example.product_aggregator_project.model.Category;
 import com.example.product_aggregator_project.model.Manufacturer;
 import com.example.product_aggregator_project.model.Product;
 import com.example.product_aggregator_project.service.ManufacturerService;

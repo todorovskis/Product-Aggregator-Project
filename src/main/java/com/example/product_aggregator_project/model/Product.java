@@ -1,5 +1,6 @@
 package com.example.product_aggregator_project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,10 +29,12 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id", nullable = false)
+    @JsonIgnore
     private Manufacturer manufacturer;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonIgnore
     private Category category;
 
     @ManyToMany
@@ -40,28 +43,36 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    @JsonIgnore
     private List<Category> categories;
 
     @OneToOne
     @JoinColumn(name = "characteristic_id", nullable = false)
+    @JsonIgnore
     private ProductCharacteristic characteristic;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Rating> ratings;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<UserComment> userComments;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<UserFavourite> userFavourites;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<WatchListProduct> watchListProducts;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<ProductInstance> productInstances;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<ProductImage> productImages;
 
     public Product() {
@@ -89,6 +100,7 @@ public class Product {
         this.characteristic = characteristic;
     }
 
+    @JsonIgnore
     public List<Store> getProductInstancesUniqueStores() {
         return productInstances.stream().distinct().map(ProductInstance::getStore).collect(Collectors.toList());
     }

@@ -44,4 +44,9 @@ public class Category {
         this.products = products;
     }
 
+    public Category(String categoryName, Category parentCategory) {
+        this.categoryName = categoryName;
+        this.parentCategory = parentCategory;
+    }
+
 }

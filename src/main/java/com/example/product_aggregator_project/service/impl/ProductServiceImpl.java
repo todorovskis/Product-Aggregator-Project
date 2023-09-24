@@ -4,7 +4,6 @@ import com.example.product_aggregator_project.model.*;
 import com.example.product_aggregator_project.model.exceptions.CategoryIdNotFoundException;
 import com.example.product_aggregator_project.model.exceptions.ManufacturerIdNotFoundException;
 import com.example.product_aggregator_project.model.exceptions.ProductIdNotFoundException;
-import com.example.product_aggregator_project.model.exceptions.UserIdNotFoundException;
 import com.example.product_aggregator_project.repository.*;
 
 import com.example.product_aggregator_project.service.CategoryService;
@@ -50,6 +49,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> listAllUnsorted() {
+        return this.productRepository.findAll();
+    }
+
+    @Override
     public Product findById(Integer productId) {
         return this.productRepository.findById(productId)
                 .orElseThrow(ProductIdNotFoundException::new);
@@ -77,6 +81,9 @@ public class ProductServiceImpl implements ProductService {
                 .orElse(null) : null;
         Manufacturer manufacturer = manufacturerId != null ? this.manufacturerRepository.findById(manufacturerId)
                 .orElse(null) : null;
+
+        if (name == null)
+            name = "";
 
         return filterProducts(name, category, manufacturer);
     }

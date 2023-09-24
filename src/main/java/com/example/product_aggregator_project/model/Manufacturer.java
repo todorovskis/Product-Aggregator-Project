@@ -34,4 +34,9 @@ public class Manufacturer {
         this.manufacturerName = manufacturerName;
         this.manufacturerCountry = manufacturerCountry;
     }
+
+    public Manufacturer(String manufacturerName, String manufacturerCountry) {
+        this.manufacturerName = manufacturerName;
+        this.manufacturerCountry = manufacturerCountry;
+    }
 }

@@ -23,7 +23,7 @@
 
     <div style="display: flex; flex-wrap: wrap; margin-top:20px;">
         <ul class="list">
-            <li th:each="product : ${products}">
+            <li th:each="product : ${products}" class="product">
                 <form th:action="@{'/products/{id}' (id=${product.getId()})}"
                       th:method="post">
                     <button type="submit" style="background: none; border: none; cursor: pointer;">
