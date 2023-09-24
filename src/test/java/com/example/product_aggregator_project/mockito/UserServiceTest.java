@@ -42,7 +42,6 @@ public class UserServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         user = new User("TestUser", "test", "TestUserName", "TestUserSurname", "test@example.com", "123-456-789");
-
         userService = spy(new UserServiceImpl(userRepository, roleRepository, passwordEncoder));
     }
 
