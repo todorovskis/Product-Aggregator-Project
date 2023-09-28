@@ -1,11 +1,11 @@
 package com.example.product_aggregator_project.cucumber.stepdefinitions;
 
 import com.example.product_aggregator_project.model.Product;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -19,14 +19,17 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @CucumberContextConfiguration
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class ProductStepDefinitions {
 
     @LocalServerPort
     private int port;
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+    private final TestRestTemplate restTemplate;
+
+    public ProductStepDefinitions(TestRestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     private ResponseEntity<List<Product>> productListResponseEntity;
     private ResponseEntity<Product> productResponseEntity;
@@ -57,14 +60,25 @@ public class ProductStepDefinitions {
     }
 
     @When("the client calls endpoint {string} with the following query parameters:")
-    public void theClientCallsEndpointWithTheFollowingQueryParameters(String endpoint, Map<String, String> queryParams) {
-        String url = "http://localhost:" + port + endpoint;
+    public void theClientCallsEndpointWithTheFollowingQueryParameters(String endpoint, DataTable queryParams) {
+        String url;
 
-        StringBuilder queryString = new StringBuilder("?");
-        for (Map.Entry<String, String> entry : queryParams.entrySet()) {
-            queryString.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+        List<Map<String, String>> rows = queryParams.asMaps(String.class, String.class);
+
+        StringBuilder queryString = new StringBuilder();
+
+        for (Map<String, String> row : rows) {
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                String parameterName = entry.getKey();
+                String parameterValue = entry.getValue();
+
+                queryString.append("&").append(parameterName).append("=").append(parameterValue);
+            }
         }
-        url += queryString.toString();
+
+        String finalQueryString = queryString.substring(1);
+
+        url = endpoint + "?" + finalQueryString;
 
         productListResponseEntity = restTemplate.exchange(
                 url,
@@ -102,6 +116,7 @@ public class ProductStepDefinitions {
 
     @Then("the response should contain a list of filtered products")
     public void theResponseShouldContainAListOfFilteredProducts() {
+        System.out.println(productListResponseEntity);
         assertThat(productListResponseEntity.getBody()).isNotNull();
     }
 }

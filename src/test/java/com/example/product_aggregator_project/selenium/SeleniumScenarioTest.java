@@ -10,6 +10,9 @@ import com.example.product_aggregator_project.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +36,7 @@ public class SeleniumScenarioTest {
     @Autowired
     ProductService productService;
 
-    private HtmlUnitDriver driver;
+    private WebDriver driver;
 
     private static Category c1;
     private static Category c2;
@@ -47,7 +50,15 @@ public class SeleniumScenarioTest {
 
     @BeforeEach
     private void setup() {
-        this.driver = new HtmlUnitDriver(true);
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+        int desiredPort = 65432;
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--port=" + desiredPort);
+        options.addArguments("--remote-allow-origins=*");
+        options.setBinary("C:\\Users\\User\\Desktop\\chrome-win64 (1)\\chrome-win64\\chrome.exe");
+
+        this.driver = new ChromeDriver(options);
         initData();
     }
 
@@ -66,8 +77,6 @@ public class SeleniumScenarioTest {
             m1 = new Manufacturer("TestManufacturer1", "TestCountry");
             m2 = new Manufacturer("TestManufacturer2", "TestCountry");
 
-
-            regularUser = userService.register(user, user, user, user, user, "user3@gmail.com", "123-456-789");
             dataInitialized = true;
         }
     }
@@ -78,7 +87,7 @@ public class SeleniumScenarioTest {
         productsPage.assertElements(0,  0);
         LoginPage loginPage = LoginPage.openLogin(this.driver);
 
-        LoginPage.doLogin(this.driver, loginPage, regularUser.getUsername(), user);
+        LoginPage.doLogin(this.driver, loginPage, "admin.admin@gmail.com", "admin");
         productsPage.assertElements(0 , 0);
 
         productsPage = AddProduct.addProduct(this.driver, "testProduct", c1.getCategoryName(), m1.getManufacturerName(), "2023-09-24", "TestDesc");

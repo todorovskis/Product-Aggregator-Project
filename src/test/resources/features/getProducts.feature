@@ -23,7 +23,7 @@ Feature: Retrieving products
   Scenario: Filter products by category
     When the client calls endpoint "/api/products/filter" with the following query parameters:
       | categoryId |
-      | 4          |
+      | 1          |
     Then the response status code should be 200
     And the response should contain a list of filtered products
 
@@ -37,6 +37,6 @@ Feature: Retrieving products
   Scenario: Filter products by multiple criteria
     When the client calls endpoint "/api/products/filter" with the following query parameters:
       | productName | categoryId | manufacturerId |
-      | Galaxy A50  | 4          | 1              |
+      | Galaxy A50  | 1          | 1              |
     Then the response status code should be 200
     And the response should contain a list of filtered products

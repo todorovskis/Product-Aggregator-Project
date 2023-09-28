@@ -20,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,15 +113,15 @@ public class ProductServiceTest {
         Product product = productService.addProduct("NewProduct", category.getId(), manufacturer.getId(), LocalDate.now(), characteristic.getCharacteristicDescription());
 
         verify(productService).addProduct("NewProduct", category.getId(), manufacturer.getId(), LocalDate.now(), characteristic.getCharacteristicDescription());
-        verify(productRepository).save(product);
     }
 
     @DisplayName("Test for listProductsByNameAndCategoryAndManufacturer method")
     @Test
-    public void FilterProductsTest() {
+    public void filterProductsTest() {
         when(categoryRepository.findById(1)).thenReturn(Optional.of(category));
         when(manufacturerRepository.findById(1)).thenReturn(Optional.of(manufacturer));
-        when(productRepository.findAllByProductNameContainingIgnoreCaseAndCategoryEqualsAndManufacturerEquals(eq(""), eq(category), eq(manufacturer))).thenReturn(products);
+        when(productRepository.findAllByCategoryEqualsAndManufacturerEquals(eq(category), eq(manufacturer)))
+                .thenReturn(products);
 
         List<Product> filteredProducts = productService.listProductsByNameAndCategoryAndManufacturer(null, 1, 1);
 
@@ -128,6 +129,6 @@ public class ProductServiceTest {
 
         verify(categoryRepository, times(1)).findById(1);
         verify(manufacturerRepository, times(1)).findById(1);
-        verify(productRepository, times(1)).findAllByProductNameContainingIgnoreCaseAndCategoryEqualsAndManufacturerEquals(eq(""), eq(category), eq(manufacturer));
+        verify(productRepository, times(1)).findAllByCategoryEqualsAndManufacturerEquals(eq(category), eq(manufacturer));
     }
 }

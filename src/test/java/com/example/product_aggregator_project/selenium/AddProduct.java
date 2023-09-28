@@ -14,8 +14,8 @@ public class AddProduct extends AbstractPage {
     private WebElement characteristic;
     private WebElement submit;
 
-    protected AddProduct(WebDriver webDriver) {
-        super(webDriver);
+    public AddProduct() {
+        super();
     }
 
     public static ProductsPage addProduct(WebDriver driver, String productName, String category, String manufacturer, String postDate, String characteristic) {

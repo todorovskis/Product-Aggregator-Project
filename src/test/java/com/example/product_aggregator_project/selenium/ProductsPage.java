@@ -18,8 +18,8 @@ public class ProductsPage extends AbstractPage {
     @FindBy(className = ".add-item")
     private List<WebElement> addProductButton;
 
-    protected ProductsPage(WebDriver webDriver) {
-        super(webDriver);
+    public ProductsPage() {
+        super();
     }
 
     public static ProductsPage to(WebDriver webDriver) {

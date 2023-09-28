@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (this.userRepository.findByEmail(username).isPresent())
             throw new UsernameAlreadyExistsException(username);
 
-        User user = new User(username, password, name, surname, email, phoneNumber);
-        user.setRole(new Role(1, "Basic user", "User"));
+        User user = this.userRepository.findById(2).get();
+//        user.setRole(new Role(1, "Basic user", "User"));
         return userRepository.save(user);
     }
 

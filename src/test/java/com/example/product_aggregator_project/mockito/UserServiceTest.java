@@ -70,15 +70,6 @@ public class UserServiceTest {
                 user.getName(), user.getSurname(), user.getEmail(), user.getPhoneNumber());
         verify(userService).register(user.getUsername(), user.getPassword(), user.getPassword(),
                 user.getName(), user.getSurname(), user.getEmail(), user.getPhoneNumber());
-        //verify(userRepository).save(registeredUser);
-
-//        assertNotNull("User is null", registeredUser);
-//        assertEquals("username does not match", user.getUsername(), registeredUser.getUsername());
-//        assertEquals("password does not match",  user.getPassword(), registeredUser.getPassword());
-//        assertEquals("name does not match", user.getName(), registeredUser.getName());
-//        assertEquals("surname does not match",  user.getSurname(), registeredUser.getSurname());
-//        assertEquals("email does not match", user.getEmail(), registeredUser.getEmail());
-//        assertEquals("phone number does not match", user.getPhoneNumber(), registeredUser.getPhoneNumber());
     }
 
     @DisplayName("Test for edit method")

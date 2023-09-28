@@ -8,9 +8,7 @@ public class AbstractPage {
 
     protected WebDriver webDriver;
 
-    protected AbstractPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
-    }
+    public AbstractPage(){}
 
     static void get(WebDriver webDriver, String relativeUrl) {
         String url = System.getProperty("geb.build.baseUrl", "http://localhost:9090") + relativeUrl;

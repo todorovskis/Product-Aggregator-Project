@@ -69,8 +69,8 @@ public class ProductServiceImpl implements ProductService {
         this.characteristicRepository.save(characteristic);
 
         Product product = setProductProperties(productName, manufacturer, postDate, characteristic, category);
-        product.getCategories().add(category);
-        product.getCategories().forEach(c -> c.getProducts().add(product));
+        // product.getCategories().add(category);
+        // product.getCategories().forEach(c -> c.getProducts().add(product));
 
         return this.productRepository.save(product);
     }
@@ -112,10 +112,10 @@ public class ProductServiceImpl implements ProductService {
             return this.productRepository
                     .findAllByProductNameContainingIgnoreCaseAndManufacturerEquals(name, manufacturer);
         } else if (category != null && manufacturer != null) {
-            if (category.getParentCategory() == null)
+            if (category.getParentCategory() == null) {
                 return this.productRepository
                         .findAllByCategoryEqualsAndManufacturerEquals(category, manufacturer);
-            else {
+            } else {
                 products.addAll(this.categoryService.listProductsByCategory(category.getId()));
                 return products.stream().
                         filter(p -> p.getManufacturer().equals(manufacturer))
@@ -141,12 +141,22 @@ public class ProductServiceImpl implements ProductService {
                                          ProductCharacteristic characteristic, Category category) {
 
         List<Category> allCategories = this.categoryService.findAllParentCategories(category);
+        Category mainCategory = null;
 
-        Category mainCategory = allCategories.get(allCategories.size() - 1);
+        if (allCategories.size() != 0) {
+            mainCategory = allCategories.get(allCategories.size() - 1);
+        } else {
+            mainCategory = category;
+        }
         Product product = new Product(productName, mainCategory, manufacturer, postDate, characteristic);
         product.setCategory(mainCategory);
-        allCategories.remove(allCategories.size() - 1);
-        product.setCategories(allCategories);
+
+        if (allCategories.size() != 0) {
+            allCategories.remove(allCategories.size() - 1);
+            product.setCategories(allCategories);
+        } else {
+            product.setCategories(List.of(mainCategory));
+        }
         product.setManufacturer(manufacturer);
         product.setCharacteristic(characteristic);
 
